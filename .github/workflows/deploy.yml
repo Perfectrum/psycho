@@ -1,0 +1,17 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ssh-pipeline
+        uses: cross-the-world/ssh-pipeline@v1.2.0
+        with:
+          host: ${{ secrets.HOST }}
+          user:  ${{ secrets.USER }}
+          pass:  ${{ secrets.PASSWORD }}
+          script: cd /home/${{ secrets.USER }}/psycho && git reset --hard origin/main
