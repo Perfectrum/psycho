@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { registerNewUser } from '../logic/connector';
 import './login.css';
 
 export function Login() {
