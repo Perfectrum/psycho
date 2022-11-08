@@ -1,14 +1,25 @@
 
 import axios from 'axios';
 
+let token = null;
+let tokenRefresh = null;
+
 async function execPost(url, body) {
     try {
-        const res = await axios.post(url, JSON.stringify(body), { 'Content-Type' : 'application/json' });
+        const tokenParams = token === null ? {} : {
+            'Authorization' : `Bearer ${token}`
+        };
+
+        const res = await axios.post(url, body, { 'Content-Type' : 'application/json', ...tokenParams });
         return res.data;
     } catch (ex) {
         console.error(ex.response ? ex.response.data : ex);
         return null;
     }
+}
+
+export function isAuthorized() {
+    return token !== null;
 }
 
 export async function registerNewUser({ name, username, password, password2 }) {
@@ -17,4 +28,19 @@ export async function registerNewUser({ name, username, password, password2 }) {
         password,
         password2
     });
+}
+
+export async function login({ username, password }) {
+    const res = await execPost('/api/token/', {
+        username,
+        password
+    });
+
+    if (!res) return res;
+    const { access, refresh } = res;
+
+    token = access;
+    tokenRefresh = refresh;
+
+    return true;
 }
