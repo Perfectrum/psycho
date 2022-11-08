@@ -5,8 +5,8 @@ import { Main } from './pages/Main';
 function App() {
 
   return (
-   <div>
-      <Main />
+   <div className='app-page'>
+      <Login />
    </div>
   );
 }
