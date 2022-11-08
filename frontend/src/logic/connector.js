@@ -52,3 +52,21 @@ export async function createNewGoal({user_id, name, description }) {
         description
     });
 }
+
+export async function renameGoal({uuser_id, goal_id, new_name })
+{
+    return await execPost('/api/goals/', {
+        user_id,
+        goal_id, 
+        new_name
+    });
+}
+
+export async function updateGoalDescription ( user_id, goal_id, new_description)
+{
+    return await execPost('/api/goals/', {
+        user_id,
+        goal_id, 
+        new_description
+    });
+}
