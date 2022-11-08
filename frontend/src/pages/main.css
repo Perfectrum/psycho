@@ -1,38 +1,105 @@
-body {
-  background-color: #ffffff;
-}
-
-
 .flex-container {
-  height: 100%;
-  display: flex;
-  justify-content: flex-start; 
-  align-items: stretch; 
-}
-
-
-.flex-container > div {
-  height: 100vh;
-  margin: 0px;
-}
-
-
-#left_menu {
   padding: 20px;
-  margin: 20px;
-  flex-grow: 2;
-  align-items: flex-end;
+  height: calc(100vh - 40px);
+  width: calc(100vw - 40px);
+  display: flex;
 }
 
-
-#left_menu:hover {
-  background-color: #f3f3f3;
-  border-radius: 5px;
+.left-menu {
+  width: 64px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.center {
+  flex: 1;
+}
 
-.items{
-margin-left: 1em;
+.main-page-tabs-list {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  width: calc(100% - 40px);
+  max-width: 500px;
+  padding: 20px;
+}
+
+.main-page-tabs-list-item {
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+
+  border-bottom: 1px solid transparent;
+  padding-bottom: 20px;
+}
+
+.main-page-tabs-list-item {
+  flex: 1;
+}
+
+.main-page-tab-selected {
+  border-bottom: 1px solid #cdcdcd;
+}
+
+.main-page-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% - 40px);
+  padding: 20px;
+}
+
+.right-bar {
+  width: 64px;
+  padding: 20px;
+
+  display: flex;
+}
+
+.user {
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  background-color: #f1f1f1;
+
+  user-select: none;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  font-weight: 600;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 20px;
+
+
+  overflow: hidden;
+}
+
+.left-menu-list-item {
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  font-size: 20px;
+
+  user-select: none;
+  transition: 0.1s;
+
+  background-color: #f1f1f1;
+  margin-top: 10px;
+}
+
+.left-menu-list-item:hover {
+  background-color: #d1d1d1;
 }
 
 
@@ -47,12 +114,6 @@ margin-left: 1em;
 
 .items a:hover {
   background-color: #ccc; 
-}
-
-
-#center {
-  flex-grow: 8;
-  background-color: #ffffff;
 }
 
 

@@ -1,39 +1,51 @@
+import { CardCreator } from "./compontents/CardCreator";
+import { CardField } from "./compontents/CardField";
 import "./main.css"
 
 export function Main() {
 
-    function horizonMenuItem(name) {
-        return ( <li><button className="listMenuItem">{name}</button></li> )
+    function horizonMenuItem(name, selected) {
+        return ( <div className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
     }
 
     function listMenuItem(name, href) {
-        return ( <a href={href}>{name}</a> )
+        return ( <div className="left-menu-list-item">{name}</div> )
     }
 
     return ( 
         <div className="flex-container">
-            <div id="left_menu">
-                <div className="items">
-                    { listMenuItem('Входящие', 'inbox') }
-                    { listMenuItem('Цели', '') }
-                    { listMenuItem('Бэклог', '') }
+            <div className="left-menu">
+                {
+                /*
+                    <div className="items">
+                     { listMenuItem('🏠', '') }
+                     { listMenuItem('✏️', '') }
+                     { listMenuItem('📭', '') }
+                     { listMenuItem('🌟', '') }
+                     { listMenuItem('📚', '') }
+                 </div>
+                 */ ""
+                }
             </div>
-            
+            <div className="center">
+                <div className="main-page-tabs-list">
+                    {horizonMenuItem("ЭКД", 's')}
+                    {horizonMenuItem("День")}
+                    {horizonMenuItem("Неделя")}
+                    {horizonMenuItem("Месяц")}
+                </div>
+                <div className="main-page-content">
+                    <CardField />
+                </div>
             </div>
-            <div id="center">
-            <ul>
-                { horizonMenuItem('ЭКД', '#') }
-                { horizonMenuItem('День', '#') }
-                { horizonMenuItem('Неделя', '#') }
-                { horizonMenuItem('...', '#') }
-                { horizonMenuItem('+', '#add_horizon') }
-            </ul>
-            <button id = "enterButton" className="Добавить входящие">+      Добавить входящие задачи</button>
-            
-            
-            </div>
-            <div id="right_bar">
-                <button id="avatar" className="user"></button>
+            <div className="right-bar">
+                {
+                /*
+                <div className="user">
+                    E
+                </div> */
+                ""
+                }
             </div>
         </div>
     );

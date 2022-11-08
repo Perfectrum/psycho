@@ -1,0 +1,13 @@
+
+.card-field {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 40px);
+    padding: 40px;
+    align-items: center;
+}
+
+.card-field .task {
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
