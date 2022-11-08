@@ -44,3 +44,29 @@ export async function login({ username, password }) {
 
     return true;
 }
+
+export async function createNewGoal({user_id, name, description }) {
+    return await execPost('/api/goals/', {
+        user_id,
+        name,
+        description
+    });
+}
+
+export async function renameGoal({user_id, goal_id, new_name })
+{
+    return await execPost('/api/goals/', {
+        user_id,
+        goal_id, 
+        new_name
+    });
+}
+
+export async function updateGoalDescription ( user_id, goal_id, new_description)
+{
+    return await execPost('/api/goals/', {
+        user_id,
+        goal_id, 
+        new_description
+    });
+}

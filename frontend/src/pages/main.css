@@ -1,90 +1,124 @@
+body {
+  background-color: #ffffff;
+}
+
 
 .flex-container {
   height: 100%;
   display: flex;
-  align-items: stretch;
-  background-color: #f1f1f1;
   justify-content: flex-start; 
   align-items: stretch; 
 }
 
+
 .flex-container > div {
-  background-color: rgb(67, 63, 63);
-  /* color: white; */
+  height: 100vh;
   margin: 0px;
-  /* text-align: center;
-  line-height: 75px;
-  font-size: 30px; */
+}
+
+
+#left_menu {
+  padding: 20px;
+  margin: 20px;
+  flex-grow: 2;
   align-items: flex-end;
 }
 
-#left_menu {
-  flex-grow: 2;
-  background-color:rgb(30, 28, 28);
-  align-items: flex-end;
+
+#left_menu:hover {
+  background-color: #f3f3f3;
+  border-radius: 5px;
 }
+
+
 .items{
-  margin-left: 1em;
-  }
-  
-  .items a {
-    background-color: #eee;  
-    color: black; 
-    display: block;
-    padding: 1px;
-    text-decoration: none; 
-  }
-  
-  .items a:hover {
-    background-color: #ccc; 
-  }
-  .items a.active {
-    background-color: #ccc; 
-    color: white;
-  }
+margin-left: 1em;
+}
+
+
+.items a {
+  background-color: #eee;  
+  color: black; 
+  display: block;
+  padding: 1px;
+  text-decoration: none; 
+}
+
+
+.items a:hover {
+  background-color: #ccc; 
+}
+
 
 #center {
   flex-grow: 8;
+  background-color: #ffffff;
 }
 
 
 ul {
-  list-style-type: none;
   margin: 0;
   padding: 0;
+  width: 100%;
+  list-style-type: none;
+  margin-top: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: #ffffff;
 }
+
 
 li {
   float: left;
 }
 
+
 li a {
   display: block;
-  color: white;
+  color: black;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
 
+
 li a:hover {
-  background-color: #111;
+  border-radius: 15%;
+  background-color: #f3f3f3;
 }
 
 
+#enterButton
+{
+  width: 400px;
+  height: 40px;
+  margin-left: auto;
+  margin-top: auto;
+  background: rgb(255, 255, 255);
+}
 
 #right_bar {
-  width: 50px;
-  background-color: rgb(51, 49, 49);
+  width: 48px;
+  background-color: #ffffff;
 }
 
 
-#avatar
-{
-  padding: 20px;
-  margin-left: 1em;
-  margin-right: 1em;
-  background: silver;
-  border-radius: 100%;
+#avatar {
+  width: 32px;
+  height: 32px;
+  margin-left: 8px;
+  margin-top: 8px;
+  background: rgb(00, 69, 69);
+  border-radius: 50%;
+}
+
+.listMenuItem {
+  padding: 5px;
+  margin: 10px;
+  border: none;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.listMenuItem:hover {
+  border-bottom: 4px solid #f3f3f3;
 }
