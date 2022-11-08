@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import "./register.css";
 
 export function Register() {
+
+    const navigate = useNavigate();
+
     return (
         <div className="register-main">
             <div className='register-main-form'>
@@ -14,7 +18,7 @@ export function Register() {
                         <input placeholder='Password again' type="password" />
                     </div>
                     <div className='button-section register-mar'>
-                        <button className='primary-button'>Register</button>
+                        <button onClick={() => navigate('/')} className='primary-button'>Register</button>
                     </div>
                 </div>
             </div>

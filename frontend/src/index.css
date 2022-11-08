@@ -21,6 +21,15 @@ p {
   height: 52px;
 }
 
+.logo-middle {
+  text-align: center;
+}
+
+.logo-middle img {
+  width: 100px;
+  height: 100px;
+}
+
 .app-page {
   width: 100vw;
   height: 100vh;
