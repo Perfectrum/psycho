@@ -1,0 +1,91 @@
+.card-creator-main {
+    padding: 40px;
+    width: calc(100% - 40px);
+    max-width: 600px;
+
+    transition: cubic-bezier(.49,-0.01,.09,.99) 0.5s;
+}
+
+.card-creator-main-h1 {
+    font-weight: 600;
+    font-size: 32px;
+
+    padding: 20px 10px 20px 10px;
+    width: calc(100% - 20px);
+
+    border: none;
+    outline: none;
+
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.card-creator-description {
+    font-size: 16px;
+
+    padding: 30px 10px 20px 10px;
+
+    max-width: calc(100% - 20px);
+    min-width: calc(100% - 20px);
+    width: calc(100% - 20px);
+
+    max-height: 80px;
+    min-height: 80px;
+
+    resize: none;
+    border: none;
+    outline: none;
+
+}
+
+.card-creator-tags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.target-tag {
+    margin-top: 10px;
+    margin-right: 10px;
+
+    background-color: #f1f1f1;
+    color: #000000;
+    border-radius: 20px;
+    padding: 10px 20px 10px 20px;
+    text-align: center;
+
+    user-select: none;
+    cursor: pointer;
+
+    transition: 0.1s;
+}
+
+.target-tag:hover {
+    background-color: #e1e1e1;
+}
+
+.target-tag-selected {
+    color: #ffffff;
+    background: linear-gradient(38deg, rgba(72,86,219,1) 18%, rgba(178,12,245,1) 100%);
+}
+
+.show-amination {
+    height: fit-content;
+    animation: show-opacity 0.5s cubic-bezier(.49,-0.01,.09,.99);
+}
+
+@keyframes show-opacity {
+    from {
+        max-height: 0;
+        transform: translateY(100px);
+        opacity: 0.0;
+    }
+
+    20% {
+        opacity: 0.0;
+    }
+
+    to {
+        max-height: 1000px;
+        transform: translateY(0);
+        opacity: 1.0;
+    }
+}

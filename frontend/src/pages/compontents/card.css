@@ -1,0 +1,33 @@
+
+.task {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    height: 200px;
+    border-radius: 10px;
+
+    background-color: #f1f1f1;
+
+    width: calc(100% - 40px);
+    max-width: 500px;
+    padding: 20px;
+
+    cursor: pointer;
+}
+
+.task-name {
+    min-width: 100px;
+    width: 40%;
+    align-self: flex-end;
+    text-align: right;
+    font-weight: 600;
+}
+
+.task-desc {
+    min-width: 100px;
+    width: 60%;
+    align-self: flex-end;
+    text-align: right;
+    font-weight: 300;
+}
