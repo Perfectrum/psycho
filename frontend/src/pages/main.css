@@ -101,3 +101,15 @@ li a:hover {
   background: rgb(00, 69, 69);
   border-radius: 50%;
 }
+
+.listMenuItem {
+  padding: 5px;
+  margin: 10px;
+  border: none;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.listMenuItem:hover {
+  border-bottom: 4px solid #f3f3f3;
+}

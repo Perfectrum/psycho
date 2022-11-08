@@ -3,16 +3,20 @@ import "./main.css"
 export function Main() {
 
     function horizonMenuItem(name) {
-        return ( <li><button>{name}</button></li> )
+        return ( <li><button className="listMenuItem">{name}</button></li> )
+    }
+
+    function listMenuItem(name, href) {
+        return ( <a href={href}>{name}</a> )
     }
 
     return ( 
         <div className="flex-container">
             <div id="left_menu">
-                <div  className="items" >
-                    <a href="#">Входящие</a>
-                    <a href="#">Цели</a>
-                    <a href="#">Задачи</a>
+                <div className="items">
+                    { listMenuItem('Входящие', 'inbox') }
+                    { listMenuItem('Цели', '') }
+                    { listMenuItem('Бэклог', '') }
             </div>
             
             </div>
@@ -20,9 +24,9 @@ export function Main() {
             <ul>
                 { horizonMenuItem('ЭКД', '#') }
                 { horizonMenuItem('День', '#') }
-                { horizonMenuItem('Неделя', '#week') }
-                { horizonMenuItem('...', '#other_horizons') }
-                { horizonMenuItem('+', '#add') }
+                { horizonMenuItem('Неделя', '#') }
+                { horizonMenuItem('...', '#') }
+                { horizonMenuItem('+', '#add_horizon') }
             </ul>
             
             
