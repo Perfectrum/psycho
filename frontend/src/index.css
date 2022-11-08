@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700;800&family=Nunito:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 body {
   margin: 0;
-  font-family: 'Khula', sans-serif;
+  font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -35,11 +35,20 @@ p {
   height: 100vh;
 }
 
-.base-form input {
-  display: block;
-  font-family: 'Khula', sans-serif;
+input {
+  font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 400;
+}
+
+textarea {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.base-form input {
+  display: block;
   padding:  12px 20px 12px 20px;
   border-radius: 5px;
   border: none;
