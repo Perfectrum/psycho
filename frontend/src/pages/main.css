@@ -87,6 +87,15 @@ li a:hover {
 }
 
 
+#enterButton
+{
+  width: 400px;
+  height: 40px;
+  margin-left: auto;
+  margin-top: auto;
+  background: rgb(255, 255, 255);
+}
+
 #right_bar {
   width: 48px;
   background-color: #ffffff;
@@ -100,4 +109,16 @@ li a:hover {
   margin-top: 8px;
   background: rgb(00, 69, 69);
   border-radius: 50%;
+}
+
+.listMenuItem {
+  padding: 5px;
+  margin: 10px;
+  border: none;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.listMenuItem:hover {
+  border-bottom: 4px solid #f3f3f3;
 }
