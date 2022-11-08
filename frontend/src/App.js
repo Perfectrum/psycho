@@ -6,7 +6,7 @@ function App() {
 
   return (
    <div className='app-page'>
-      <Login />
+      <Register />
    </div>
   );
 }

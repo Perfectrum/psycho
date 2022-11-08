@@ -1,5 +1,5 @@
 
-.login-main {
+.register-main {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,11 +8,15 @@
     height: 100vh;
 }
 
-.login-main-form {
+.register-main-form {
     width: 100%;
     max-width: 500px;
 }
 
-.login-main-form-padding {
+.register-main-form-padding {
     padding: 40px;
+}
+
+.register-mar {
+    margin-top: 30px;
 }

@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700;800&family=Nunito:wght@200&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Khula', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -12,7 +12,75 @@ code {
     monospace;
 }
 
+p {
+  line-height: 1.2em;
+}
+
+.logo-small img{
+  width: 52px;
+  height: 52px;
+}
+
 .app-page {
   width: 100vw;
   height: 100vh;
 }
+
+.base-form input {
+  display: block;
+  font-family: 'Khula', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  padding:  12px 20px 12px 20px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: #f1f1f1;
+  margin-top: 10px;
+  width: calc(100% - 40px);
+}
+
+.base-form button {
+  height: 45px;
+  border-radius: 8px;
+
+  border: none;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.button-section {
+  padding-top: 20px;
+  text-align: center;
+}
+
+.button-section button:first-child {
+  margin-top: 0;
+}
+
+.button-section button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.primary-button {
+  background-color: #24202c;
+  color: #f1f1f1;
+  font-weight: 500;
+}
+
+.secondary-button {
+  background-color: #f1f1f1;
+  color: #24202c;
+  font-weight: 500;
+}
+
+.primary-button:hover {
+  background-color: #3d3847;
+}
+
+.secondary-button:hover {
+  background-color: #dedede;
+}
+
