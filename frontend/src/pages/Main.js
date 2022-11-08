@@ -28,6 +28,7 @@ export function Main() {
                 { horizonMenuItem('...', '#') }
                 { horizonMenuItem('+', '#add_horizon') }
             </ul>
+            <button id = "enterButton" className="Добавить входящие">+      Добавить входящие задачи</button>
             
             
             </div>
