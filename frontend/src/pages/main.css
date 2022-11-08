@@ -87,6 +87,15 @@ li a:hover {
 }
 
 
+#enterButton
+{
+  width: 400px;
+  height: 40px;
+  margin-left: auto;
+  margin-top: auto;
+  background: rgb(255, 255, 255);
+}
+
 #right_bar {
   width: 48px;
   background-color: #ffffff;
