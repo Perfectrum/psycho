@@ -1,6 +1,7 @@
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Main } from './pages/Main';
+import { Create } from './pages/Create';
 
 import {
   Routes,
@@ -13,6 +14,7 @@ function App() {
   console.log("APP RERENDERERD")
   return (
       <Routes>
+        <Route path='/create' element={(<Create />)}></Route>
         <Route path='/main' element={(<Main />)}></Route>
         <Route path='/' element={(<Login />)}></Route>
         <Route path='/register' element={(<Register />)}></Route>
