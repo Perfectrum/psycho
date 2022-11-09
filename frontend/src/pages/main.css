@@ -129,8 +129,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: calc(100% - 40px);
-  padding: 20px;
+  width: 100%;
+}
+
+.main-page-card-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
 }
 
 .right-bar {

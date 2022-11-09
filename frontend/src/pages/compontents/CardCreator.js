@@ -1,6 +1,8 @@
 import { createRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './cardCreator.css';
+
+import { Card } from './Card';
 
 
 const FAKE_BUCKETS = [
@@ -13,8 +15,16 @@ const FAKE_BUCKETS = [
 
 export function CardCreator() {
 
+    let parentCardContent = null;
+    const { state : locationState } = useLocation();
+    if (locationState) {
+        const { parentContent } = locationState;
+        if (parentContent) {
+            parentCardContent = parentContent;
+        }
+    }
+
     const descInput = createRef();
-    const navigate = useNavigate();
 
     const [ buckets, updateBuckets ] = useState(FAKE_BUCKETS);
     const [ stage, updateStage ] = useState(0); 
@@ -23,11 +33,10 @@ export function CardCreator() {
         const { name, selected } = item;
         return (
             <div onClick={() => {
-                const wasSelected = item.selected;
                 for (const bucket of buckets) {
                     bucket.selected = false;
                 }
-                item.selected = !wasSelected;
+                item.selected = true;
                 updateBuckets([...buckets]);
             }} key={name} selected='selected' className={`${selected ? 'target-bucker-selected' : ''} target-bucker`}>
                 {name}
@@ -62,9 +71,9 @@ export function CardCreator() {
     return (
         <div className="card-creator-main">
             {
-                stage >= 0 ? (
+                stage >= 0 && parentCardContent ? (
                     <div className='parent-cards-field'>
-                        {tableCard()}
+                        <Card mode='parent' content={parentCardContent} />
                     </div>
                 ) : ""
             }
@@ -91,6 +100,11 @@ export function CardCreator() {
                     <div className='show-amination card-creator-buckets'>
                         {buckets.map(bucket)}
                     </div>
+                ) : ""
+            }
+            {
+                stage >= 2 ? (
+                    <div>Добавить</div>
                 ) : ""
             }
         </div>
