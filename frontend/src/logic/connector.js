@@ -134,7 +134,7 @@ export async function createInboxItem (  title, description)
 
 export async function deleteInboxItem (inbox_id)
 {
-    return await execPost('/api/inbox/delete/' + inbox_id + '/');
+    return await execGet('/api/inbox/delete/' + inbox_id + '/');
 }
 
 /*createTask*/
