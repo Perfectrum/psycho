@@ -1,6 +1,15 @@
-// import { createRef } from 'react';
-// import { useNavigate } from 'react-router-dom'
 import './matrix.css';
+import { MovableTask } from './MovableTask'
+
+
+export function Test() {
+    return (
+        <div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems: 'center'}}>
+            <Matrix/>
+        </div>
+    );
+}
+
 
 function matrixDecorItem(text, id) {
     return (
@@ -13,6 +22,8 @@ export function Matrix() {
     return (
         <div className="matrix">
             <div className="emoji" id="fire">🔥</div>
+            <div className="importanceHeader">Срочно {'<-------------------------------------------'} </div>
+            <div className="urgencyHeader">Важно</div>
             <div className="emoji" id="sparkles">✨</div>
             <div className="matrixBackground">
                 <div className="separator horizontalSeparator"></div>
@@ -21,6 +32,7 @@ export function Matrix() {
                 { matrixDecorItem("EARLIER THE BETTER!", "earlierBetter") }
                 { matrixDecorItem("TO DO OR NOT TO DO...", "doOrNo") }
             </div>
+            { MovableTask("Тас очка") }
         </div>
     );
 }

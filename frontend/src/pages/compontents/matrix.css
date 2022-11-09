@@ -73,3 +73,15 @@
     top: 0;
     left: 50%;
 }
+
+.importanceHeader {
+    position: absolute;
+    left: 60px;
+}
+
+.urgencyHeader {
+    position: absolute;
+    top: 60px;
+    left: -55px;
+    rotate: -45deg;
+}
