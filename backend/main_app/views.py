@@ -44,6 +44,7 @@ class InboxListAPIView(APIView):
 
     def get(self, request):
         inboxes = Inbox.objects.filter(user=request.user)
+        # inboxes = Inbox.objects.all()
         serializer = InboxSerializer(inboxes, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -56,8 +57,6 @@ class CreateTaskAPIView(APIView):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-# TODO: goals - create, delete, rename, update goal description
 
 
 class GoalCreateAPIView(APIView):
