@@ -81,7 +81,7 @@
 @keyframes show-opacity {
     from {
         max-height: 0;
-        transform: translateY(100px);
+        transform: translateY(50px);
         opacity: 0.0;
     }
 
@@ -139,4 +139,34 @@
     width: 18px;
     height: 18px;
     margin-right: 3px;
+}
+
+.card-creator-top {
+    margin-top: 20px;
+}
+
+.card-creator-panel {
+    padding-top: 30px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.add-card-button {
+    border: none;
+    outline: none;
+
+    width: 100px;
+    padding: 10px 0 12px 0;
+
+    border-radius: 20px;
+
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(38deg, rgba(176,53,238,1) 18%, rgba(232,24,194,1) 65%);
+
+    transition: 0.2s;
+
+    font-size: 14px;
+    line-height: 20px;
+    cursor: pointer;
 }

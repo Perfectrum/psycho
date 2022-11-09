@@ -1,6 +1,7 @@
 import { createRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './cardCreator.css';
+import * as cardManager from '../../logic/cards';
 
 import { Card } from './Card';
 
@@ -15,6 +16,8 @@ const FAKE_BUCKETS = [
 
 export function CardCreator() {
 
+    const navigate = useNavigate();
+
     let parentCardContent = null;
     const { state : locationState } = useLocation();
     if (locationState) {
@@ -24,9 +27,10 @@ export function CardCreator() {
         }
     }
 
+    const nameInput = createRef();
     const descInput = createRef();
 
-    const [ buckets, updateBuckets ] = useState(FAKE_BUCKETS);
+    const [ buckets, updateBuckets ] = useState([ ...FAKE_BUCKETS ]);
     const [ stage, updateStage ] = useState(0); 
 
     function bucket(item) {
@@ -36,6 +40,9 @@ export function CardCreator() {
                 for (const bucket of buckets) {
                     bucket.selected = false;
                 }
+
+                updateStage(Math.max(stage, 2));
+
                 item.selected = true;
                 updateBuckets([...buckets]);
             }} key={name} selected='selected' className={`${selected ? 'target-bucker-selected' : ''} target-bucker`}>
@@ -80,7 +87,7 @@ export function CardCreator() {
             {
                 stage >= 0 ? (
                     <div className='card-creator-top'>
-                        <input onKeyDown={(e) => {
+                        <input ref={nameInput} onKeyDown={(e) => {
                             if (e.key === 'Enter') {
                                 e.preventDefault();
                                 descInput.current.focus();
@@ -89,7 +96,7 @@ export function CardCreator() {
                         <textarea ref={descInput} onKeyDown={(e) => {
                             if (e.key === 'Enter') {
                                 e.preventDefault();
-                                updateStage(Math.max(stage, 2));
+                                updateStage(Math.max(stage, 1));
                             }
                         }} placeholder='Task description' className='card-creator-description'/>
                     </div>
@@ -104,7 +111,16 @@ export function CardCreator() {
             }
             {
                 stage >= 2 ? (
-                    <div>Добавить</div>
+                    <div className='show-amination card-creator-panel'>
+                        <button onClick={() => {
+                            const name = nameInput.current.value;
+                            const desc = descInput.current.value;
+
+                            cardManager.addCard(name, desc, null);
+                            navigate('/main');
+
+                        }} className='add-card-button'>Create</button>
+                    </div>
                 ) : ""
             }
         </div>

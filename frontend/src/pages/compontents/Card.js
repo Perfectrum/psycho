@@ -17,7 +17,7 @@ export function Card(props) {
 
     return (
         <div ref={meElem} 
-            className={`card-with-border ${mode !== 'parent' ? 'wake-up-anim' : ''}`}
+            className={`${mode ==='parent' ? 'card-without-border' :  'card-with-border'} ${mode !== 'parent' ? 'wake-up-anim' : ''}`}
             >
             <div className='task-table-card-right'>
                 <div className={`task-table-card-action ${animClass}`} onClick={() => {
@@ -64,7 +64,7 @@ export function Card(props) {
                 <div className='task-table-card-info'>
                     <div className='task-table-card-info-tag'>
                         <img src="./star.png"></img>
-                        Buy a car
+                        Win hackaton
                     </div>
                     <div className='task-table-card-info-tag'>
                         <img src="./book.png"></img>

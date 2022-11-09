@@ -51,6 +51,8 @@ const FAKE_CARDS = [
     ]
 ];
 
+let lastId = 6;
+
 let callbackFunc = () => {}
 export function callback(f) {
     callbackFunc = f;
@@ -79,4 +81,13 @@ export function move(card) {
 
 export function getCards() {
     return FAKE_CARDS;
+}
+
+export function addCard(name, desc, bucket) {
+    FAKE_CARDS[2].push({
+        id : ++lastId,
+        name,
+        desc,
+        tags: []
+    })
 }
