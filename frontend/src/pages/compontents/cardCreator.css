@@ -41,6 +41,8 @@
 .card-creator-buckets {
     display: flex;
     flex-wrap: wrap;
+
+    margin-bottom: 20px;
 }
 
 .target-bucker {
@@ -68,6 +70,16 @@
     background: #030303;
 }
 
+.target-bucker-disabled {
+    text-decoration: line-through;
+    background-color: transparent;
+}
+
+.target-bucker-disabled:hover {
+    text-decoration: line-through;
+    background-color: transparent;
+}
+
 .target-bucker-selected:hover {
     color: #ffffff;
     background: #030303;
@@ -90,7 +102,7 @@
     }
 
     to {
-        max-height: 1000px;
+        max-height: 400px;
         transform: translateY(0);
         opacity: 1.0;
     }
@@ -169,4 +181,9 @@
     font-size: 14px;
     line-height: 20px;
     cursor: pointer;
+}
+
+.target-target-selected {
+    background: linear-gradient(38deg, rgba(62,206,210,1) 29%, rgba(154,44,223,1) 82%);
+    color: #ffffff;
 }

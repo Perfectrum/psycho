@@ -5,9 +5,25 @@ import "./main.css"
 import * as cardsManager from '../logic/cards';
 import { useState } from "react";
 
+function packTopButton(name, value, selected) {
+    return {
+        name,
+        value,
+        selected
+    }
+}
+
 export function Main() {
 
     const [ counter, updateCounter ] = useState(0);
+    const [ topButtons, _ ] = useState([
+        packTopButton("Все", null, true),
+        packTopButton("Квант", cardsManager.BUCKETS.quant, false),
+        packTopButton("День", cardsManager.BUCKETS.day, false),
+        packTopButton("Неделя", cardsManager.BUCKETS.week, false),
+        packTopButton("Месяц", cardsManager.BUCKETS.month, false),
+        packTopButton("Год", cardsManager.BUCKETS.year, false)
+    ]);
     
     function forceUpdate() {
         updateCounter(counter + 1);
@@ -18,8 +34,15 @@ export function Main() {
 
     cardsManager.callback(forceUpdate);
 
-    function horizonMenuItem(name, selected) {
-        return ( <div data-tooltip={name == 'ЭКД' ? "Элементарный квант действия" : ""} className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
+    function horizonMenuItem(button, idx) {
+        const { name, value, selected } = button;
+        return ( <div key={idx} onClick={() => {
+            for (const btn of topButtons) {
+                btn.selected = false;
+            }
+            button.selected = true;
+            cardsManager.setFilter(value);
+        }} data-tooltip={name == 'ЭКД' ? "Элементарный квант действия" : ""} className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
     }
 
     function listMenuItem(name, href) {
@@ -28,12 +51,8 @@ export function Main() {
 
     return ( 
         <div className="flex-container">
-            <div className="add-button">
+            <div onClick={() => navigate('/create')} className="add-button">
                 +
-                <div className="add-button-menu">
-                    <div onClick={() => navigate('/create')} className="add-button-menu-item">Цель</div>
-                    <div onClick={() => navigate('/create')} className="add-button-menu-item">Задача</div>
-                </div>
             </div>
             {/*
             <div className="left-menu">
@@ -49,16 +68,13 @@ export function Main() {
             }
             <div className="center">
                 <div className="main-page-tabs-list">
-                    {horizonMenuItem("ЭКД", 's')}
-                    {horizonMenuItem("День")}
-                    {horizonMenuItem("Неделя")}
-                    {horizonMenuItem("Месяц")}
+                    {topButtons.map(horizonMenuItem)}
                 </div>
                 <div className="main-page-content">
                     <div className="main-page-card-list">
-                        { cards[0].length ? <CardField content={cards[0]} type='done' /> : "" }
-                        { cards[1].length ? <CardField content={cards[1]} type='progress' /> : "" }
-                        { cards[2].length ? <CardField content={cards[2]} type='todo' /> : "" }
+                       <CardField content={cards[0]} type='done' />
+                       <CardField content={cards[1]} type='progress' />
+                       <CardField content={cards[2]} type='todo' />
                     </div>
                 </div>
             </div>
