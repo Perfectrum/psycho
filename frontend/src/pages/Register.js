@@ -15,7 +15,7 @@ export function Register() {
 
     function register() {
         const values = {
-            name : nameInput.current.value,
+            first_name : nameInput.current.value,
             username : usernameInput.current.value,
             password : passwordInput.current.value,
             password2 : password2Input.current.value   

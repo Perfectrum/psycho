@@ -18,13 +18,28 @@ async function execPost(url, body) {
     }
 }
 
+async function execGet(url, body) {
+    try {
+        const tokenParams = token === null ? {} : {
+            'Authorization' : `Bearer ${token}`
+        };
+
+        const res = await axios.get(url, body, { 'Content-Type' : 'application/json', ...tokenParams });
+        return res.data;
+    } catch (ex) {
+        console.error(ex.response ? ex.response.data : ex);
+        return null;
+    }
+}
+
 export function isAuthorized() {
     return token !== null;
 }
 
-export async function registerNewUser({ name, username, password, password2 }) {
+export async function registerNewUser({ username, first_name, password, password2 }) {
     return await execPost('/api/register/', {
         username,
+        first_name,
         password,
         password2
     });
@@ -80,27 +95,42 @@ export async function updateGoalDescription ( user_id, goal_id, new_description)
     });
 }
 
-export async function createInboxItem ( user_id, name, description)
+
+export async function getAllInboxes( )
 {
-    return await execPost('/api/goals/', {
-        user_id,
-        name, 
+    return await execGet('/api/inbox/list/');
+}
+
+
+export async function createInboxItem (  title, description)
+{
+    return await execPost('/api/inbox/list/', {
+        title,
         description
     });
 }
 
+
+export async function deleteInboxItem (inbox_id)
+{
+    return await execPost('/api/inbox/delete/' + inbox_id + '/');
+}
+
+/*createTask*/
+
+
 export async function renameInboxItem ( user_id, inbox_id, new_name)
 {
-    return await execPost('/api/goals/', {
+    return await execPost('/api/inbox/', {
         user_id,
         inbox_id,
         new_name
     });
 }
 
-export async function update_inbox_item_description ( user_id, inbox_item_id, new_description)
+export async function updateInboxItemDescription ( user_id, inbox_item_id, new_description)
 {
-    return await execPost('/api/goals/', {
+    return await execPost('/api/inbox/', {
         user_id,
         inbox_item_id,
         new_description
