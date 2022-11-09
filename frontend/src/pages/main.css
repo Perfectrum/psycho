@@ -3,6 +3,88 @@
   height: calc(100vh - 40px);
   width: calc(100vw - 40px);
   display: flex;
+
+  position: relative;
+}
+
+.add-button {
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+
+  width: 20px;
+  height: 20px;
+
+  line-height: 15px;
+
+  padding: 20px;
+
+  z-index: 3;
+  border-radius: 50%;
+  background-color: #303030;
+  color: #ffffff;
+
+  font-weight: 300;
+  font-size: 32px;
+
+  cursor: pointer;
+
+  transition: ease-out 0.2s;
+
+  transition-delay: 0.2s;
+
+  overflow: visible;
+}
+
+.add-button:hover {
+  background-color: #646060;
+}
+
+.add-button-menu {
+  width: 0;
+  height: 0;
+
+  overflow: hidden;
+
+}
+
+.add-button-menu-item {
+  color: #303030;
+  background-color: #f1f1f1;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 5px;
+  border-radius: 10px;
+
+  cursor: pointer;
+  user-select: none;
+
+  padding: 10px;
+}
+
+.add-button-menu-item:hover {
+  background-color: #e1e1e1;
+}
+
+.add-button:hover .add-button-menu {
+  width: 100px;
+  height: 200px;
+
+  margin-top: -120px;
+  margin-left: -40px;
+
+  animation: shift-up 0.3s cubic-bezier(.38,.2,.3,1);
+}
+
+@keyframes shift-up {
+    from {
+      opacity: 0.0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1.0;
+      transform: translateY(0);
+    }
 }
 
 .left-menu {

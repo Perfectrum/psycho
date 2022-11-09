@@ -103,3 +103,34 @@ textarea {
   background-color: #dedede;
 }
 
+.card-creator-close img{
+  width: 32px;
+  height: 32px;
+}
+
+.card-creator-close {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+
+  background-color: transparent;
+  transition: ease-out 0.2s;
+  cursor: pointer;
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+
+  transform: rotate(0deg);
+}
+
+.card-creator-close:hover {
+  background-color: #f1f1f1;
+  transform: rotate(90deg);
+}
+

@@ -31,3 +31,61 @@
     text-align: right;
     font-weight: 300;
 }
+
+
+.task-table-card {
+    display: flex;
+    padding: 10px;
+}
+
+.task-table-card-right {
+    width: 24px;
+    padding-right: 10px;
+}
+
+.task-table-card-right img {
+    width: 24px;
+    height: 24px;
+}
+
+.task-table-card-name {
+    font-weight: 600;
+    padding-bottom: 5px;
+}
+
+.task-table-card-desc {
+    font-weight: 300;
+}
+
+.task-table-card-info {
+    padding-top: 10px;
+}
+
+.task-table-card-info-tag {
+    display: inline-flex;
+
+    align-items: flex-end;
+    color: #808080;
+
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.task-table-card-info-tag img {
+    width: 18px;
+    height: 18px;
+    margin-right: 3px;
+}
+
+.card-with-border {
+
+    width: 100%;
+
+    display: flex;
+    border-top: 1px solid #cdcdcd;
+    padding: 20px;
+}
+
+.card-with-border:first-child {
+    border-top: 1px solid transparent;
+}
