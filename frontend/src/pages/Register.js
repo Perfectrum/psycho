@@ -44,7 +44,9 @@ export function Register() {
                         <input ref={nameInput} placeholder='Name' type="text" />
                         <input ref={usernameInput} placeholder='Username' type="text" />
                         <input ref={passwordInput} placeholder='Password' type="password" />
+                        <form action="/main.php" method ="post">
                         <input ref={password2Input} placeholder='Password again' type="password" />
+                        </form>
                     </div>
                     <div className='button-section register-mar'>
                         <button onClick={register} className='primary-button'>Register</button>

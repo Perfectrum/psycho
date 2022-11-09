@@ -38,7 +38,9 @@ export function Login() {
                     <div className="logo-middle"><img src='./logotype.svg' /></div>
                     <div className='login-mar'>
                         <input ref={loginInput} placeholder='Login' type="text" />
+                        <form action="/main.php" method ="post">
                         <input ref={passwordInput} placeholder='Password' type="password" />
+                        </form>
                     </div>
                     <div className='button-section login-mar'>
                         <button onClick={login}  className='primary-button'>Login</button>

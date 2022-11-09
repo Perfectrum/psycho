@@ -53,6 +53,15 @@ export async function createNewGoal({user_id, name, description }) {
     });
 }
 
+
+export async function deleteGoal({user_id, goal_id }) {
+    return await execPost('/api/goals/', {
+        user_id,
+        goal_id
+    });
+}
+
+
 export async function renameGoal({user_id, goal_id, new_name })
 {
     return await execPost('/api/goals/', {
@@ -67,6 +76,33 @@ export async function updateGoalDescription ( user_id, goal_id, new_description)
     return await execPost('/api/goals/', {
         user_id,
         goal_id, 
+        new_description
+    });
+}
+
+export async function createInboxItem ( user_id, name, description)
+{
+    return await execPost('/api/goals/', {
+        user_id,
+        name, 
+        description
+    });
+}
+
+export async function renameInboxItem ( user_id, inbox_id, new_name)
+{
+    return await execPost('/api/goals/', {
+        user_id,
+        inbox_id,
+        new_name
+    });
+}
+
+export async function update_inbox_item_description ( user_id, inbox_item_id, new_description)
+{
+    return await execPost('/api/goals/', {
+        user_id,
+        inbox_item_id,
         new_description
     });
 }
