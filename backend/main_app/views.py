@@ -21,6 +21,7 @@ class InboxDeleteAPIView(APIView):
     def get_object(self, pk):
         return get_object_or_404(Inbox, id=pk)
 
+
     def get(self, request, pk):
         inbox = self.get_object(pk)
         inbox.delete()
