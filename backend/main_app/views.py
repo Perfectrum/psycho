@@ -1,5 +1,5 @@
-from .models import Inbox
-from .serializers import InboxSerializer, InboxPatchSerializer, TaskSerializer
+from .models import Inbox, Goal
+from .serializers import InboxSerializer, TaskSerializer, GoalSerializer, InboxPatchSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -40,6 +40,13 @@ class InboxPatchAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class InboxListAPIView(APIView):
+
+    def get(self, request):
+        inboxes = Inbox.objects.filter(user=request.user)
+        serializer = InboxSerializer(inboxes, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class CreateTaskAPIView(APIView):
 
@@ -50,7 +57,40 @@ class CreateTaskAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # go to the page where card is placed
+# TODO: goals - create, delete, rename, update goal description
 
-    # get table with created card
+
+class GoalCreateAPIView(APIView):
+
+    def post(self, request):
+        serializer = GoalSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GoalDeleteApiView(APIView):
+
+    def get_object(self, pk):
+        return get_object_or_404(Goal, id=pk)
+
+    def delete(self, request, pk):
+        goal = self.get_object(pk)
+        goal.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class GoalUpdateInformationAPIView(APIView):
+
+    def get_object(self, pk):
+        return get_object_or_404(Goal, id=pk)
+
+    def patch(self, request, pk):
+        serializer = GoalSerializer(data=request.data)
+        if serializer.is_valid():
+            goal = self.get_object(pk)
+            goal.update(data=serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
