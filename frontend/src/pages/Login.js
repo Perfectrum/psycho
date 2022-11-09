@@ -47,6 +47,7 @@ export function Login() {
                         <button onClick={() => navigate('/register')} className='secondary-button'>Register</button>
                     </div>
                 </div>
+
             </div>
         </div>
     );

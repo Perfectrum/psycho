@@ -124,6 +124,24 @@
 .main-page-tab-selected {
   border-bottom: 1px solid #cdcdcd;
 }
+[data-tooltip] {
+  position: relative;
+ }
+ [data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute; 
+  width: 300px; 
+  left: -100px; top: 0; 
+  color: rgb(6, 6,6); 
+  padding: 0.5em;
+  pointer-events: none; 
+  opacity: 0; 
+  transition: 1s; 
+ } 
+ [data-tooltip]:hover::after {
+  opacity: 1; 
+  top: 2em; 
+ }
 
 .main-page-content {
   display: flex;
