@@ -79,6 +79,7 @@ class Task(models.Model):
     is_done = models.BooleanField("Готова", default=False)
     description = models.TextField("Описание", blank=True, null=True)
     deadline = models.IntegerField("Дедлайн", blank=True, null=True)
+    planned = models.BooleanField("Запалнировано", default=False)
     importance = models.FloatField("Важность", blank=True, default=0)
     urgency = models.FloatField("Срочность", blank=True, default=0)
 

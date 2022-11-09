@@ -1,5 +1,5 @@
 from .models import Inbox
-from .serializers import InboxSerializer
+from .serializers import InboxSerializer, TaskSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -25,3 +25,18 @@ class InboxDeleteAPIView(APIView):
         inbox = self.get_object(pk)
         inbox.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class CreateTaskAPIView(APIView):
+
+    def post(self, request):
+        serializer = TaskSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # go to the page where card is placed
+
+    # get table with created card
+
