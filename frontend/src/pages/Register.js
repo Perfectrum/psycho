@@ -13,7 +13,10 @@ export function Register() {
     const passwordInput = createRef();
     const password2Input = createRef();
 
-    function register() {
+    function register(e) {
+
+        e.preventDefault();
+
         const values = {
             name : nameInput.current.value,
             username : usernameInput.current.value,
@@ -44,7 +47,9 @@ export function Register() {
                         <input ref={nameInput} placeholder='Name' type="text" />
                         <input ref={usernameInput} placeholder='Username' type="text" />
                         <input ref={passwordInput} placeholder='Password' type="password" />
-                        <input ref={password2Input} placeholder='Password again' type="password" />
+                        <form onSubmit={register}>
+                            <input ref={password2Input} placeholder='Password again' type="password" />
+                        </form>
                     </div>
                     <div className='button-section register-mar'>
                         <button onClick={register} className='primary-button'>Register</button>

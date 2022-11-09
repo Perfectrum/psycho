@@ -43,9 +43,85 @@
     padding-right: 10px;
 }
 
+.task-table-card-action {
+    cursor: pointer;
+
+    width: 24px;
+    height: 24px;
+}
+
 .task-table-card-right img {
     width: 24px;
     height: 24px;
+
+    border-radius: 50%;
+    
+}
+
+.jump-anim img:hover {
+    animation: jump-x 0.3s cubic-bezier(.38,.2,.3,1) forwards;
+}
+
+@keyframes jump-x {
+    from {
+        background-color: transparent;
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-3px);
+    }
+    to {
+        background-color: #f1f1f1;
+        transform: translateX(0);
+    }
+}
+
+.rot-anim img:hover {
+    animation: rot-jump 0.3s cubic-bezier(.38,.2,.3,1) forwards;
+}
+
+@keyframes rot-jump {
+    from {
+        background-color: transparent;
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(45deg);
+    }
+    to {
+        background-color: #f1f1f1;
+        transform: rotate(0deg);
+    }
+}
+
+.wake-up-anim {
+    animation: show-card 0.2s cubic-bezier(.38,.2,.3,1) forwards;
+}
+
+@keyframes show-card {
+    from {
+        transform: translateX(40px);
+        opacity: 0.0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1.0;
+    }
+}
+
+.hide-down-anim {
+    animation: hide-card 0.2s cubic-bezier(.38,.2,.3,1) forwards;
+}
+
+@keyframes hide-card {
+    from {
+        transform: translateX(0);
+        opacity: 1.0;
+    }
+    to {
+        transform: translateX(-40px);
+        opacity: 0.0;
+    }
 }
 
 .task-table-card-name {
@@ -82,10 +158,44 @@
     width: 100%;
 
     display: flex;
-    border-top: 1px solid #cdcdcd;
     padding: 20px;
+
+    transition: 0.2s;
 }
 
-.card-with-border:first-child {
-    border-top: 1px solid transparent;
+.task-table-add-action {
+    margin-top: 5px;
+    opacity: 0.0;
+    transition: 0.2s;
+
+    cursor: pointer;
+
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
 }
+
+.task-table-add-action img {
+    width: 24px;
+    height: 24px;
+    
+    transition: cubic-bezier(.38,.2,.3,1) 0.2s;
+}
+
+.task-table-add-action:hover {
+    background-color: #f1f1f1;
+}
+
+.task-table-add-action:hover img {
+    transform: rotate(90deg);
+}
+
+.parent-icon-img {
+    margin-top: 10px;
+    transform: rotate(-90deg);
+}
+
+.card-with-border:hover .task-table-add-action {
+    opacity: 1.0;
+}
+
