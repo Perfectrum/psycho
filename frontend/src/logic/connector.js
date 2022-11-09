@@ -18,6 +18,20 @@ async function execPost(url, body) {
     }
 }
 
+async function execDelete(url, body) {
+    try {
+        const tokenParams = token === null ? {} : {
+            'Authorization' : `Bearer ${token}`
+        };
+
+        const res = await axios.delete(url, body, { 'Content-Type' : 'application/json', ...tokenParams });
+        return res.data;
+    } catch (ex) {
+        console.error(ex.response ? ex.response.data : ex);
+        return null;
+    }
+}
+
 async function execGet(url, body) {
     try {
         const tokenParams = token === null ? {} : {
