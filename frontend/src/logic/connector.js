@@ -60,36 +60,32 @@ export async function login({ username, password }) {
     return true;
 }
 
-export async function createNewGoal({user_id, name, description }) {
-    return await execPost('/api/goals/', {
-        user_id,
-        name,
+export async function createNewGoal({ title, description }) {
+    return await execPost('/api/goals/create_goal/', {
+        title,
         description
     });
 }
 
 
-export async function deleteGoal({user_id, goal_id }) {
-    return await execPost('/api/goals/', {
-        user_id,
-        goal_id
-    });
+export async function deleteGoal({ goal_id }) {
+    return await execPost('/api/goals/delete/' + goal_id + '/');
 }
 
-
-export async function renameGoal({user_id, goal_id, new_name })
+/*Хз, проверить, как передавать поля*/
+export async function renameGoal({ goal_id, new_name })
 {
     return await execPost('/api/goals/', {
-        user_id,
         goal_id, 
         new_name
     });
 }
 
-export async function updateGoalDescription ( user_id, goal_id, new_description)
+/*Хз, проверить, как передавать поля*/
+
+export async function updateGoalDescription (  goal_id, new_description)
 {
     return await execPost('/api/goals/', {
-        user_id,
         goal_id, 
         new_description
     });

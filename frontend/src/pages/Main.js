@@ -8,7 +8,7 @@ export function Main() {
     const navigate = useNavigate();
 
     function horizonMenuItem(name, selected) {
-        return ( <div className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
+        return ( <div data-tooltip={name == 'ЭКД' ? "Элементарный квант действия" : ""} className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
     }
 
     function listMenuItem(name, href) {
