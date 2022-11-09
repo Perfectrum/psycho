@@ -8,6 +8,17 @@ class InboxSerializer(serializers.ModelSerializer):
         fields = ("title", "description")
 
 
+class InboxPatchSerializer(serializers.Serializer):
+    title = serializers.CharField(required=False)
+    description = serializers.CharField(required=False)
+
+    def update(self, instance, validated_data):
+        instance.title = validated_data.get("title", instance.title)
+        instance.description = validated_data.get("description", instance.description)
+        instance.save()
+        return instance
+
+
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task

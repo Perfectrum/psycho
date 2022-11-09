@@ -12,6 +12,9 @@ class Goal(models.Model):
     )
     description = models.TextField("Описание", blank=True, null=True)
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name = "Цель"
         verbose_name_plural = "Цели"
@@ -27,6 +30,9 @@ class Inbox(models.Model):
     )
     description = models.TextField("Описание", blank=True, null=True)
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name = "Входящая задача"
         verbose_name_plural = "Входящие задачи"
@@ -41,6 +47,9 @@ class Horizon(models.Model):
         verbose_name="Пользователь"
     )
     description = models.TextField("Описание", blank=True, null=True)
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name = "Горизонт"
@@ -82,6 +91,9 @@ class Task(models.Model):
     planned = models.BooleanField("Запалнировано", default=False)
     importance = models.FloatField("Важность", blank=True, default=0)
     urgency = models.FloatField("Срочность", blank=True, default=0)
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name = "Задача"

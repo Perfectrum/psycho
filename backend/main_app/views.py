@@ -1,5 +1,5 @@
 from .models import Inbox
-from .serializers import InboxSerializer, TaskSerializer
+from .serializers import InboxSerializer, InboxPatchSerializer, TaskSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -25,6 +25,20 @@ class InboxDeleteAPIView(APIView):
         inbox = self.get_object(pk)
         inbox.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class InboxPatchAPIView(APIView):
+
+    def get_object(self, pk):
+        return get_object_or_404(Inbox, id=pk)
+
+    def patch(self, request, pk):
+        inbox = self.get_object(pk)
+        serializer = InboxPatchSerializer(inbox, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CreateTaskAPIView(APIView):
