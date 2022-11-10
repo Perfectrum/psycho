@@ -27,7 +27,7 @@ export function Matrix() {
             <div className="urgencyHeader">Важно</div>
             <div className="arrow" id="verticalArrow">{"< "}---------------------------{" >"}</div>
             <div className="emoji" id="sparkles">✨</div>
-            <div className="matrixBackground">
+            <div className="matrixBackground" id="matrixField">
                 <div className="separator horizontalSeparator"></div>
                 <div className="separator verticalSeparator"></div>
                 { matrixDecorItem("ASAP", "asap") }
@@ -35,6 +35,7 @@ export function Matrix() {
                 { matrixDecorItem("TO DO OR NOT TO DO...", "doOrNo") }
             </div>
             { MovableTask("Proof of concept", 500, 300) }
+            { MovableTask("Proof of concept 2", 500, 300) }
         </div>
     );
 }

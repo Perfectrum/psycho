@@ -50,7 +50,7 @@ const FAKE_CARDS = [
         {
             id : 3,
             name : 'Сделать алгосы',
-            desc : 'Мишунин опять отправил правики ааъ',
+            desc : '',
             bucket: BUCKETS.day,
             parent: null,
             hasChild: false,
