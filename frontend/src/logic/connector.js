@@ -172,3 +172,44 @@ export async function createTask (title, reference_id, goal_id, horizon_id, desc
     });
 }
 
+
+
+
+
+
+const reqExmpl = [{
+    "id": 1,
+    "reference": null,
+    "goals": ["goal1", "goal2"],
+    "horizon": "quant",
+    "state": "todo",
+    "description": "Smth",
+    "Deadline": "Yeasterday",
+    "Importance": 15,
+    "Urgency": 10
+  }];
+
+
+
+export async function getAllTasks() {
+    const response = await execGet('/api/task/list/');
+
+    function convertTask (task) {
+        return {
+            "id": task["id"],
+            "name": task["title"],
+            "desc": task["description"],
+            "parent": task["reference"],
+            "fullName": [],
+            "tags": tags["goals"],
+            "hasChild": false,
+            "bucket": task["horizon"]
+        }
+    }
+    
+    return [
+        response.filter( task => task["state"] != "todo" ).map( convertTask ),
+        response.filter( task => task["state"] != "progress" ).map( convertTask ),
+        response.filter( task => task["state"] != "done" ).map( convertTask )
+    ];
+}
