@@ -30,10 +30,10 @@ export function Card(props) {
                     }, 200);
                 }}>
                     {
-                        mode === 'parent' ? (<img className='parent-icon-img' src='back.png' />) :
-                        mode === 'todo' ? (<img src='to_progress.png' />) :
-                        mode === 'progress' ? (<img src='check_free.png' />) :
-                        mode === 'done' ? (<img src='check.png' />) : ""
+                        mode === 'parent' ? (<img className='parent-icon-img' src='/back.png' />) :
+                        mode === 'todo' ? (<img src='/to_progress.png' />) :
+                        mode === 'progress' ? (<img src='/check_free.png' />) :
+                        mode === 'done' ? (<img src='/check.png' />) : ""
                     }
                 </div>
                 {
@@ -46,7 +46,7 @@ export function Card(props) {
                         }}
                         className='task-table-add-action'
                       >
-                            <img src='add.png' />
+                            <img src='/add.png' />
                       </div>
                     ) : ""
                 }
@@ -78,16 +78,16 @@ export function Card(props) {
                         tags.length ? 
                         tags.map((e, i) => (
                             <div key={i} onClick={() => cardsManager.setGoalFilter(e)} className='task-table-card-info-tag task-table-card-info-tag-goal'>
-                                <img src="./star.png"></img> {e}
+                                <img src="/star.png"></img> {e}
                             </div>
                         )) : (
                             <div className='task-table-card-info-tag'>
-                                <img src="./cancel.png"></img> No goal
+                                <img src="/cancel.png"></img> No goal
                             </div>
                         )
                     }
                     <div className='task-table-card-info-tag'>
-                        <img src="./book.png"></img>
+                        <img src="/book.png"></img>
                         {bucket}
                     </div>
                 </div>

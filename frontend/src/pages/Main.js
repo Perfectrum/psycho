@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet, Link } from "react-router-dom";
 import { CardField } from "./compontents/CardField";
 import { Goals } from './Goals';
 import "./main.css"
@@ -22,9 +22,24 @@ function listMenuItem(imagepath, name, href) {
     return ( 
         <div className="left-menu-list-item"> 
             <img src={imagepath}/>
-            <a href={href}>{name}</a>
+            <Link to='board'>{name}</Link>
         </div>
     );
+}
+
+export function BoardPanel() {
+    const cards = cardsManager.getCards();
+    return (
+        <div className="main-page-card-list">
+            <CardField content={cards[0]} type='done' />
+            <CardField content={cards[1]} type='progress' />
+            <CardField content={cards[2]} type='todo' />
+        </div>
+    );
+}
+
+export function GoalPanel() {
+    return (<Goals />);
 }
 
 export  function Main() {
@@ -44,7 +59,6 @@ export  function Main() {
         updateCounter(counter + 1);
     }
 
-    const cards = cardsManager.getCards();
     const navigate = useNavigate();
 
     cardsManager.callback(forceUpdate);
@@ -68,10 +82,10 @@ export  function Main() {
             {
             <div className="left-menu">
                     <div className="items">
-                        { listMenuItem("inbox.png",'Входящие', 'inbox') }
-                        { listMenuItem("matrix.png", 'Матрица', 'matrix') }
-                        { listMenuItem("goals.png",'Цели', 'goals') }
-                        { listMenuItem("list.png", 'Задачи', 'main') }
+                        { listMenuItem("/inbox.png",'Входящие', 'inbox') }
+                        { listMenuItem("/matrix.png", 'Матрица', 'matrix') }
+                        { listMenuItem("/goals.png",'Цели', 'goals') }
+                        { listMenuItem("/list.png", 'Задачи', 'main') }
                         {/* <Router>
                             <nav>
                                 { listMenuItem("inbox.png",'Входящие', 'inbox') }
@@ -92,11 +106,7 @@ export  function Main() {
                     {topButtons.map(horizonMenuItem)}
                 </div>
                 <div className="main-page-content">
-                    <div className="main-page-card-list">
-                       <CardField content={cards[0]} type='done' />
-                       <CardField content={cards[1]} type='progress' />
-                       <CardField content={cards[2]} type='todo' />
-                    </div>
+                    <Outlet />
                 </div>
             </div>
         <div style={{display: 'none'}}>{counter}</div>
