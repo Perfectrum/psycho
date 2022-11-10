@@ -154,6 +154,25 @@ export function CardCreator() {
                     </div>
                 ) : ""
             }
+            {
+                stage == 1 ? (
+                    <div className='show-amination card-creator-panel'>
+                        <button onClick={() => {
+                            const name = nameInput.current.value;
+                            const desc = descInput.current.value;
+
+                            cardManager.addInbox(
+                                name, 
+                                desc,
+                                parentCardContent ? parentCardContent.id : null,
+                            );
+
+                            navigate('/main');
+
+                        }} className='add-card-button-black'>To inbox</button>
+                    </div>
+                ) : ""
+            }
         </div>
     );
 }

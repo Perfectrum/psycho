@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react';
 import './matrix.css';
 import { MovableTask } from './MovableTask'
-
+import * as cardsManager from '../../logic/cards';
 
 export function Test() {
     return (
@@ -19,6 +20,24 @@ function matrixDecorItem(text, id) {
 
 export function Matrix() {
 
+    const [ cards, loadCards ] = useState([[], [], []]);
+
+    useEffect(() => {
+        console.log("MATRIX EFFECT")
+        cardsManager.getCards().then((c) => {
+            if (c) {
+                loadCards(c);
+            }
+        })
+    }, []);
+
+    const flat = [];
+    for (const c of cards) {
+        for (const i of c) {
+            flat.push(i);
+        }
+    }
+
     return (
         <div className="matrix">
             <div className="emoji" id="fire">🔥</div>
@@ -35,9 +54,7 @@ export function Matrix() {
                 { matrixDecorItem("TO DO OR NOT TO DO...", "doOrNo") }
             </div>
 
-            { MovableTask("Геншин", 500, 300, 0.2, 0.25) }
-            { MovableTask("Снять видео", 500, 300, 0.6, 0.4) }
-            { MovableTask("Поспать", 500, 300, 0.8, 0.9) }
+            { flat.map(e => <MovableTask key={e.id} label={e.name} fieldWidth={500} fieldHeight={300} importance={Math.random()} urgency={Math.random()} />) }
         </div>
     );
 }

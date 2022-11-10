@@ -173,6 +173,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: calc(100% - 62px);
 }
 
 .main-page-card-list {
@@ -237,6 +238,7 @@
 .main-page-big-width {
   width: 100%;
   max-width: 1140px;
+  align-self: flex-start;
 }
 
 .left-menu-list-item {

@@ -25,9 +25,10 @@ export function Card(props) {
                         meElem.current.classList.remove('wake-up-anim');
                         meElem.current.classList.add('hide-down-anim');
                     }
+
                     setTimeout(() => {
                         cardsManager.move(content);
-                    }, 200);
+                    }, 150);
                 }}>
                     {
                         mode === 'parent' ? (<img className='parent-icon-img' src='/back.png' />) :
@@ -48,6 +49,23 @@ export function Card(props) {
                       >
                             <img src='/add.png' />
                       </div>
+                    ) : ""
+                }
+                {
+                    mode !== 'todo' &&  mode !== 'parent' ?
+                    (
+                        <div onClick={() => {
+                            if (mode !== 'done' && mode !== 'parent') {
+                                meElem.current.classList.remove('wake-up-anim');
+                                meElem.current.classList.add('hide-not-down-anim');
+                            }
+        
+                            setTimeout(() => {
+                                cardsManager.moveBack(content);
+                            }, 150);
+                        }} className='task-table-go-back-action'>
+                            <img src='/back_arrow.png' />
+                        </div>
                     ) : ""
                 }
             </div>

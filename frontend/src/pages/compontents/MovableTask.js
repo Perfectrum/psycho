@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import { DragMove } from "./DragMove";
 
 
-export function MovableTask(
-  label, fieldWidth, fieldHeight, importance=0.5, urgency=0.5) {
+export function MovableTask(props) {
+
+  const { label, fieldWidth, fieldHeight, importance, urgency } = props;
 
     const [translate, setTranslate] = useState({
         x: fieldWidth * (1 - urgency),

@@ -26,6 +26,28 @@ async function execPost(url, body) {
     }
 }
 
+async function execPatch(url, body) {
+
+    try {
+
+        fromLocalStorage();
+        const tokenParams = token === null ? {} : {
+            headers: {
+                'Authorization' : `Bearer ${token}`
+            }
+        };
+
+        // console.log(tokenParams);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+        const res = await axios.patch(url, body, { 'Content-Type' : 'application/json', ...tokenParams });
+        return res.data;
+    } catch (ex) {
+        console.error(ex.response ? ex.response.data : ex);
+        return null;
+    }
+}
+
 async function execDelete(url, body) {
     try {
 
@@ -181,8 +203,6 @@ export async function updateInboxItemDescription ( user_id, inbox_item_id, new_d
     });
 }
 
-
-
 export async function getAllTasks() {
     const response = await execGet('/api/task/list/');
 
@@ -220,7 +240,7 @@ export async function getAllTasks() {
 }
 
 
-export async function createTask (title, importance, urgency, horizon, state, reference=null, goals=null) {
+export async function createTask (title, description, importance, urgency, horizon, state, reference=null, goals=null) {
     return await execPost('/api/task/create/', {
         title,
         importance,
@@ -228,17 +248,29 @@ export async function createTask (title, importance, urgency, horizon, state, re
         horizon,
         state,
         reference,
-        goals
+        goals,
+        description
     });
 }
 
 
 export async function patchTask (task_id, title, description, state, importance, urgency) {
-    return await execPost(`/api/task/patch/${task_id}/`, {
+    return await execPatch(`/api/task/patch/${task_id}/`, {
         state,
         importance,
         urgency,
         title,
         description
     });
+}
+
+export async function createGoal(title, description) {
+    return await execPost('/api/goals/create_goal', {
+        title,
+        description
+    });
+}
+
+export async function getAllGoals() {
+    return await execGet('/api/goals/list', {});
 }

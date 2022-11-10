@@ -110,19 +110,59 @@ function remove(arr, item) {
 
 export async function move(card) {
     if (card.state === 'todo') {
-        await 
+        await connector.patchTask(
+                card.id, 
+                undefined, 
+                undefined,
+                'progress',
+                undefined,
+                undefined
+            );
     } else if (card.state === 'progress') {
-
+        await connector.patchTask(
+            card.id, 
+            undefined, 
+            undefined,
+            'done',
+            undefined,
+            undefined
+        );
     }
+
+    callbackFunc();
+}
+
+export async function moveBack(card) {
+    if (card.state === 'done') {
+        await connector.patchTask(
+                card.id, 
+                undefined, 
+                undefined,
+                'progress',
+                undefined,
+                undefined
+            );
+    } else if (card.state === 'progress') {
+        await connector.patchTask(
+            card.id, 
+            undefined, 
+            undefined,
+            'todo',
+            undefined,
+            undefined
+        );
+    }
+
+    callbackFunc();
 }
 
 export async function getCards() {
     console.log('REQ1');
     return (await connector.getAllTasks()).map(
-        e => e.filter(x => 
+        e => e.map(x => { x.bucket = bucket_eq[x.bucket]; return x; }).filter(x => 
             (filter === null || x.bucket === filter) 
             && (goalFilter === null || x.tags.includes(goalFilter)
-        )).map(x => { x.bucket = bucket_eq[x.bucket]; return x; })
+        ))
     );
 }
 
@@ -137,6 +177,11 @@ export function setFilter(f) {
 
 export function setGoalFilter(goal) {
     goalFilter = goal;
+    callbackFunc();
+}
+
+export async function addInbox(name, desc, parent) {
+    await connector.createTask(name, desc, 0, 0, 0, 'inbox', parent);
     callbackFunc();
 }
 
@@ -160,7 +205,7 @@ export async function addCard(name, desc, bucket, parent, tags) {
     }
     */
 
-    await connector.createTask(name, 0, 0, bucket_eq.indexOf(bucket), 'todo', parent);
+    await connector.createTask(name, desc, 0, 0, bucket_eq.indexOf(bucket), 'todo', parent);
 
     /*
 
