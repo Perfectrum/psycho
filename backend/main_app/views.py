@@ -1,4 +1,4 @@
-from .models import Inbox, Goal
+from .models import Inbox, Goal, Task
 from .serializers import InboxSerializer, TaskSerializer, GoalSerializer, InboxPatchSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -40,6 +40,7 @@ class InboxPatchAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class InboxListAPIView(APIView):
 
     def get(self, request):
@@ -57,6 +58,14 @@ class TaskCreateAPIView(APIView):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TaskListAPIView(APIView):
+
+    def get(self, request):
+        tasks = Task.objects.filter(user=request.user)
+        serializer = TaskSerializer(tasks, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class GoalCreateAPIView(APIView):
