@@ -86,6 +86,14 @@ class GoalCreateAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class GoalListView(APIView):
+
+    def get(self, request):
+        goals = Goal.objects.filter(user=request.user)
+        serializer = GoalSerializer(goals, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 class GoalDeleteApiView(APIView):
 
     def get_object(self, pk):
