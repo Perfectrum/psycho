@@ -62,25 +62,29 @@ export  function Main() {
                 +
             </div>
             {
-            <div className="left-menu">
-                    <div className="items">
-                        { listMenuItem("inbox.png",'Входящие', 'inbox') }
-                        { listMenuItem("matrix.png", 'Матрица', 'matrix') }
-                        { listMenuItem("goals.png",'Цели', 'goals') }
-                        { listMenuItem("list.png", 'Задачи', 'main') }
-                        {/* <Router>
-                            <nav>
-                                { listMenuItem("inbox.png",'Входящие', 'inbox') }
-                                { listMenuItem("matrix.png", 'Матрица', 'matrix') }
-                                <Link to = "/goals"> { listMenuItem("goals.png",'Цели', 'goals') }</Link>
-                                { listMenuItem("list.png", 'Задачи', 'main') }
-                            </nav>
-                        </Router>
-                        <Routes>
-                            <Route path="/goals" element={<Goals />} />
-                        </Routes> */}
-                 </div>
-            </div>
+            // <div className="left-menu">
+            //         <div className="items">
+            //             { listMenuItem("inbox.png",'', 'inbox') }
+            //             { listMenuItem("matrix.png", '', 'matrix') }
+            //             { listMenuItem("goals.png",'', 'goals') }
+            //             { listMenuItem("list.png", '', 'main') }
+            //             {/* <Router>
+            //                 <nav>
+            //                     { listMenuItem("inbox.png",'Входящие', 'inbox') }
+            //                     { listMenuItem("matrix.png", 'Матрица', 'matrix') }
+            //                     <Link to = "/goals"> { listMenuItem("goals.png",'Цели', 'goals') }</Link>
+            //                     { listMenuItem("list.png", 'Задачи', 'main') }
+            //                     { listMenuItem("inbox.png",'Входящие', 'inbox') }
+            //             { listMenuItem("matrix.png", 'Матрица', 'matrix') }
+            //             { listMenuItem("goals.png",'Цели', 'goals') }
+            //             { listMenuItem("list.png", 'Задачи', 'main') }
+            //                 </nav>
+            //             </Router>
+            //             <Routes>
+            //                 <Route path="/goals" element={<Goals />} />
+            //             </Routes> */}
+            //      </div>
+            // </div>
             }
             
             <div className="center">
@@ -89,6 +93,12 @@ export  function Main() {
                 </div>
                 <div className="main-page-content">
                     <div className="main-page-card-list">
+                    <div className="items">
+                        { listMenuItem("inbox.png",'', 'inbox') }
+                        { listMenuItem("matrix.png", '', 'matrix') }
+                        { listMenuItem("goals.png",'', 'goals') }
+                        { listMenuItem("list.png", '', 'main') }
+                 </div>
                        <CardField content={cards[0]} type='done' />
                        <CardField content={cards[1]} type='progress' />
                        <CardField content={cards[2]} type='todo' />
