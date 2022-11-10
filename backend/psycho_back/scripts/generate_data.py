@@ -17,7 +17,7 @@ def create():
     goals = []
     tasks = []
 
-    users = User.objects.filter(username__in=[f"user {i}" for i in range(10)])
+    users = User.objects.all()
     for user in users:
         for i in range(8):
             goals.append(Goal(title=f"goal {i}", user=user))
