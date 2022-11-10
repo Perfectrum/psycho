@@ -21,7 +21,7 @@ export function Card(props) {
             >
             <div className='task-table-card-right'>
                 <div className={`task-table-card-action ${animClass}`} onClick={() => {
-                    if (mode !== 'done' && mode !== 'parent') {
+                    if (mode !== 'parent') {
                         meElem.current.classList.remove('wake-up-anim');
                         meElem.current.classList.add('hide-down-anim');
                     }

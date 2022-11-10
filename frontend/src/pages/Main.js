@@ -70,7 +70,7 @@ export function BoardPanel() {
             button.selected = true;
             cardsManager.setFilter(value);
             updateTopButtons([...topButtons]);
-        }} data-tooltip={name == 'Квант' ? "Минимальный промежуток времени (обычно ~20 минут)" : ""} className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
+        }} className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
     }
 
     return (

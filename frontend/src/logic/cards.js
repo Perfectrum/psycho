@@ -127,6 +127,15 @@ export async function move(card) {
             undefined,
             undefined
         );
+    } else if (card.state === 'done') {
+        await connector.patchTask(
+            card.id, 
+            undefined, 
+            undefined,
+            'removed',
+            undefined,
+            undefined
+        );
     }
 
     callbackFunc();
@@ -205,7 +214,7 @@ export async function addCard(name, desc, bucket, parent, tags) {
     }
     */
 
-    await connector.createTask(name, desc, 0, 0, bucket_eq.indexOf(bucket), 'todo', parent);
+    await connector.createTask(name, desc, 0, 0, bucket_eq.indexOf(bucket), 'todo', parent, tags);
 
     /*
 
