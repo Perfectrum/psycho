@@ -19,8 +19,12 @@ function horizonMenuItem(name, selected) {
 }
 
 function listMenuItem(imagepath, name, href) {
-    return ( <div className="left-menu-list-item"> <img src={imagepath}/>
-    <a href={href}>{name}</a></div> )
+    return ( 
+        <div className="left-menu-list-item"> 
+            <img src={imagepath}/>
+            <a href={href}>{name}</a>
+        </div>
+    );
 }
 
 export function Main() {
