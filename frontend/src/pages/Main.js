@@ -19,11 +19,12 @@ export function Main() {
     cardsManager.callback(forceUpdate);
 
     function horizonMenuItem(name, selected) {
-        return ( <div data-tooltip={name == 'ЭКД' ? "Элементарный квант действия" : ""} className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
+        return ( <div data-tooltip={name == 'ЭКД' ? "Квант" : ""} className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
     }
 
-    function listMenuItem(name, href) {
-        return ( <div className="left-menu-list-item">{name}</div> )
+    function listMenuItem(imagepath, name, href) {
+        return ( <div className="left-menu-list-item"> <img src={imagepath}/>
+        {name}</div> )
     }
 
     return ( 
@@ -35,17 +36,15 @@ export function Main() {
                     <div onClick={() => navigate('/create')} className="add-button-menu-item">Задача</div>
                 </div>
             </div>
-            {/*
+            {
             <div className="left-menu">
                     <div className="items">
-                     { listMenuItem('🏠', '') }
-                     { listMenuItem('✏️', '') }
-                     { listMenuItem('📭', '') }
-                     { listMenuItem('🌟', '') }
-                     { listMenuItem('📚', '') }
+                     { listMenuItem("inbox.png",'Входящие', '') }
+                     { listMenuItem("matrix.png", 'Матрица', '') }
+                     { listMenuItem("goals.png",'Цели', '') }
+                     { listMenuItem("list.png", 'Задачи', '') }
                  </div>
             </div>
-            */ ""
             }
             <div className="center">
                 <div className="main-page-tabs-list">

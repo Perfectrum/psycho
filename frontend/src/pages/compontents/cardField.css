@@ -17,6 +17,10 @@
     }
 }
   
+.card-field-cont {
+    flex: 1;
+    max-width: 380px;
+}
 
 .card-field .task {
     margin-bottom: 10px;

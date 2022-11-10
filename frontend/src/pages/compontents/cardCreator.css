@@ -41,6 +41,8 @@
 .card-creator-buckets {
     display: flex;
     flex-wrap: wrap;
+
+    margin-bottom: 20px;
 }
 
 .target-bucker {
@@ -68,6 +70,16 @@
     background: #030303;
 }
 
+.target-bucker-disabled {
+    text-decoration: line-through;
+    background-color: transparent;
+}
+
+.target-bucker-disabled:hover {
+    text-decoration: line-through;
+    background-color: transparent;
+}
+
 .target-bucker-selected:hover {
     color: #ffffff;
     background: #030303;
@@ -81,7 +93,7 @@
 @keyframes show-opacity {
     from {
         max-height: 0;
-        transform: translateY(100px);
+        transform: translateY(50px);
         opacity: 0.0;
     }
 
@@ -90,7 +102,7 @@
     }
 
     to {
-        max-height: 1000px;
+        max-height: 400px;
         transform: translateY(0);
         opacity: 1.0;
     }
@@ -139,4 +151,39 @@
     width: 18px;
     height: 18px;
     margin-right: 3px;
+}
+
+.card-creator-top {
+    margin-top: 20px;
+}
+
+.card-creator-panel {
+    padding-top: 30px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.add-card-button {
+    border: none;
+    outline: none;
+
+    width: 100px;
+    padding: 10px 0 12px 0;
+
+    border-radius: 20px;
+
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(38deg, rgba(176,53,238,1) 18%, rgba(232,24,194,1) 65%);
+
+    transition: 0.2s;
+
+    font-size: 14px;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.target-target-selected {
+    background: linear-gradient(38deg, rgba(62,206,210,1) 29%, rgba(154,44,223,1) 82%);
+    color: #ffffff;
 }

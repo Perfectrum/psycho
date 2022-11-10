@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 export function Card(props) {
     const { content, mode } = props;
-    const { name, desc, tags } = content;
+    const { name, desc, bucket, hasChild, parent, fullName, tags } = content;
 
     const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ export function Card(props) {
 
     return (
         <div ref={meElem} 
-            className={`card-with-border ${mode !== 'parent' ? 'wake-up-anim' : ''}`}
+            className={`${mode ==='parent' ? 'card-without-border' :  'card-with-border'} ${mode !== 'parent' ? 'wake-up-anim' : ''}`}
             >
             <div className='task-table-card-right'>
                 <div className={`task-table-card-action ${animClass}`} onClick={() => {
@@ -37,7 +37,7 @@ export function Card(props) {
                     }
                 </div>
                 {
-                    mode !== 'done' && mode !== 'parent' ? 
+                    mode !== 'done' && mode !== 'parent' && bucket !== cardsManager.BUCKETS.quant ? 
                     ( <div
                         onClick={() => {
                             navigate('/create', {
@@ -52,7 +52,19 @@ export function Card(props) {
                 }
             </div>
             <div>
-                <div className='task-table-card-name'>{name}</div>
+                <div className='task-table-card-name'>
+                    {name}
+                </div>
+                {   fullName.length ?
+                        (
+                        <div className='task-table-card-path'>
+                            {fullName.map((e, i) => 
+                                <span key={`${e}-${i}`} className='card-indicator'>
+                                    {`--> ${e}`}
+                                </span>
+                            )}
+                        </div>) : ""
+                    }
                 {
                     mode !== 'done' ?
                     (
@@ -62,13 +74,21 @@ export function Card(props) {
                     ) : ""
                 }
                 <div className='task-table-card-info'>
-                    <div className='task-table-card-info-tag'>
-                        <img src="./star.png"></img>
-                        Buy a car
-                    </div>
+                    {
+                        tags.length ? 
+                        tags.map((e, i) => (
+                            <div key={i} className='task-table-card-info-tag'>
+                                <img src="./star.png"></img> {e}
+                            </div>
+                        )) : (
+                            <div className='task-table-card-info-tag'>
+                                <img src="./cancel.png"></img> No goal
+                            </div>
+                        )
+                    }
                     <div className='task-table-card-info-tag'>
                         <img src="./book.png"></img>
-                        Week
+                        {bucket}
                     </div>
                 </div>
             </div>
