@@ -109,7 +109,11 @@ function remove(arr, item) {
 }
 
 export async function move(card) {
-    if (card)
+    if (card.state === 'todo') {
+        await 
+    } else if (card.state === 'progress') {
+
+    }
 }
 
 export async function getCards() {
