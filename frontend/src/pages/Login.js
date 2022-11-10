@@ -11,7 +11,9 @@ export function Login() {
     const loginInput = createRef();
     const passwordInput = createRef();
 
-    function login() {
+    function login(e) {
+
+        e.preventDefault();
 
         const values = {
             username : loginInput.current.value,
@@ -38,8 +40,8 @@ export function Login() {
                     <div className="logo-middle"><img src='./logotype.svg' /></div>
                     <div className='login-mar'>
                         <input ref={loginInput} placeholder='Login' type="text" />
-                        <form action="/main.php" method ="post">
-                        <input ref={passwordInput} placeholder='Password' type="password" />
+                        <form onSubmit={login}>
+                            <input ref={passwordInput} placeholder='Password' type="password" />
                         </form>
                     </div>
                     <div className='button-section login-mar'>
