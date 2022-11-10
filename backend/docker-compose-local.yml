@@ -1,0 +1,29 @@
+version: "3.2"
+services:
+
+  app:
+    build:
+      context: ./backend
+    container_name: back
+    image: back
+    restart: always
+    command: ["./start.sh"]
+    env_file:
+        - .env
+    volumes:
+      - ./backend:/backend
+    depends_on:
+      - redis
+    ports:
+      - "6969:8000"
+    networks:
+      - main
+
+  redis:
+    image: redis
+    container_name: redis
+    networks:
+      - main
+
+networks:
+  main:
