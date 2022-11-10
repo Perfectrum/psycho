@@ -90,7 +90,7 @@
 }
 
 .left-menu {
-  width: 64px;
+  width: 160px;
   padding: 20px;
   display: flex;
   align-items: center;
@@ -134,7 +134,7 @@
   position: absolute; 
   width: 300px; 
   left: -100px; top: 0; 
-  color: rgb(6, 6,6); 
+  color: rgb(6, 6,6);
   padding: 0.5em;
   pointer-events: none; 
   opacity: 0; 
@@ -185,6 +185,8 @@
 .items {
   display: flex;
   flex-direction: column;
+  font-weight: 300;
+  font-size: 32px;
 
   border-radius: 20px;
 
@@ -204,6 +206,8 @@
 
   background-color: #f1f1f1;
   margin-top: 10px;
+
+  border-radius: 10px;
 }
 
 .left-menu-list-item:hover {
@@ -218,6 +222,14 @@
   padding: 1px;
   text-decoration: none; 
 }
+
+.left-menu-list-item img {
+  align-self: flex-start;
+
+  margin-right: 4px;
+}
+
+
 
 
 .items a:hover {

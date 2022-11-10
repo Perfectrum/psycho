@@ -13,6 +13,15 @@ function packTopButton(name, value, selected) {
     }
 }
 
+function horizonMenuItem(name, selected) {
+    return ( <div data-tooltip={name == 'ЭКД' ? "Квант" : ""} className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
+}
+
+function listMenuItem(imagepath, name, href) {
+    return ( <div className="left-menu-list-item"> <img src={imagepath}/>
+    <a href={href}>{name}</a></div> )
+}
+
 export function Main() {
 
     const [ counter, updateCounter ] = useState(0);
@@ -42,11 +51,7 @@ export function Main() {
             }
             button.selected = true;
             cardsManager.setFilter(value);
-        }} data-tooltip={name == 'ЭКД' ? "Элементарный квант действия" : ""} className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
-    }
-
-    function listMenuItem(name, href) {
-        return ( <div className="left-menu-list-item">{name}</div> )
+        }} data-tooltip={name == 'Квант' ? "Минимальный промежуток времени (обычно ~20 минут)" : ""} className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
     }
 
     return ( 
@@ -54,18 +59,18 @@ export function Main() {
             <div onClick={() => navigate('/create')} className="add-button">
                 +
             </div>
-            {/*
-            <div className="left-menu">
-                    <div className="items">
-                     { listMenuItem('🏠', '') }
-                     { listMenuItem('✏️', '') }
-                     { listMenuItem('📭', '') }
-                     { listMenuItem('🌟', '') }
-                     { listMenuItem('📚', '') }
-                 </div>
-            </div>
-            */ ""
+
+            {
+            // <div className="left-menu">
+            //         <div className="items">
+            //          { listMenuItem("inbox.png",'Входящие', 'inbox') }
+            //          { listMenuItem("matrix.png", 'Матрица', 'matrix') }
+            //          { listMenuItem("goals.png",'Цели', 'goals') }
+            //          { listMenuItem("list.png", 'Задачи', 'main') }
+            //      </div>
+            // </div>
             }
+            
             <div className="center">
                 <div className="main-page-tabs-list">
                     {topButtons.map(horizonMenuItem)}
@@ -78,16 +83,6 @@ export function Main() {
                     </div>
                 </div>
             </div>
-            {
-                /*
-            <div className="right-bar">
-
-                <div className="user">
-                    E
-                </div> 
-            </div>
-            */""
-            }
         <div style={{display: 'none'}}>{counter}</div>
         </div>
     );

@@ -2,7 +2,7 @@ import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Main } from './pages/Main';
 import { Create } from './pages/Create';
-import { MainGoals } from './pages/MainGoals';
+import { Goals } from './pages/Goals';
 
 import {
   Routes,
@@ -20,7 +20,7 @@ function App() {
         <Route path='/' element={(<Login />)}></Route>
         <Route path='/register' element={(<Register />)}></Route>
         <Route path='/test' element={(<Test />)}></Route>
-        <Route path='/mainGoals' element={(<MainGoals />)}></Route>
+        <Route path='/goals' element={(<Goals />)}></Route>
       </Routes>
   );
 }

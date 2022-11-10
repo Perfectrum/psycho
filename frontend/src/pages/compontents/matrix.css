@@ -62,7 +62,7 @@
 }
 
 .horizontalSeparator {
-    top: 45%;
+    top: 50%;
     width: 100%;
     height: 2px;
 }
@@ -84,4 +84,19 @@
     top: 60px;
     left: -55px;
     rotate: -45deg;
+}
+
+.arrow {
+    position: absolute;
+    color: gray;
+}
+
+#horizontalArrow {
+    left: calc(50px + 5em);
+}
+
+#verticalArrow {
+    top: 10em;
+    left: -117px;
+    rotate: 90deg;
 }
