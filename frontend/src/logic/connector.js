@@ -108,7 +108,7 @@ export async function renameGoal(goal_id, new_name)
 
 /*Хз, проверить, как передавать поля*/
 
-export async function updateGoalDescription (  goal_id, new_description)
+export async function updateGoalDescription ( goal_id, new_description)
 {
     return await execPost('/api/goals/', {
         goal_id, 
@@ -120,6 +120,11 @@ export async function updateGoalDescription (  goal_id, new_description)
 export async function getAllInboxes( )
 {
     return await execGet('/api/inbox/list/');
+}
+
+export async function getAllTasks()
+{
+    return await execGet('/api/task/list/')
 }
 
 
@@ -158,17 +163,14 @@ export async function updateInboxItemDescription ( user_id, inbox_item_id, new_d
     });
 }
 
-export async function createTask (title, reference_id, goal_id, horizon_id, description, deadline, importance, urgency)
+export async function createTask (title, importance, urgency, horizon, state)
 {
     return await execPost('/api/task/create/', {
         title,
-        reference_id,
-        goal_id,
-        horizon_id,
-        description,
-        deadline,
         importance,
-        urgency
+        urgency,
+        horizon,
+        state
     });
 }
 
