@@ -168,19 +168,27 @@ export async function updateInboxItemDescription ( user_id, inbox_item_id, new_d
 export async function getAllTasks() {
     const response = await execGet('/api/task/list/');
 
-    var fullNames = {}
+    for (const task of response) {
+        let cur = task.reference;
+        task.fullName = [];
+        while(cur !== null) {
+            const cur2 = response.find(x => x.id === cur);
+            task.fullName.push(cur2.title);
+            cur = cur2.reference;
+        }
+    }
 
-
-    function convertTask (task, ind, tasksList) {
+    function convertTask (task, _, tasksList) {
         return {
             "id": task["id"],
             "name": task["title"],
             "desc": task["description"],
             "parent": task["reference"],
-            "fullName": [],
+            "fullName": task.fullName,
             "tags": task["goals"],
             "hasChild": tasksList
-                .map( cur => cur["reference"] === task["name"] ).reduce((x, y) => x || y, false),
+                .map( cur => cur["reference"] === task["id"] )
+                .reduce((x, y) => x || y, false),
             "bucket": task["horizon"]
         }
     }
