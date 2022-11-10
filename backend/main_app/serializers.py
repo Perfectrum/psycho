@@ -23,11 +23,15 @@ class TaskUpdateSerializer(serializers.Serializer):
     title = serializers.CharField(required=False)
     description = serializers.CharField(required=False)
     state = serializers.CharField(required=False)
+    importance = serializers.FloatField(required=False)
+    urgency = serializers.FloatField(required=False)
 
     def update(self, instance, validated_data):
         instance.title = validated_data.get("title", instance.title)
         instance.description = validated_data.get("description", instance.description)
         instance.state = validated_data.get("state", instance.state)
+        instance.importance = validated_data.get("importance", instance.importance)
+        instance.urgency = validated_data.get("urgency", instance.urgency)
         instance.save()
         return instance
 
