@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from psycho_back import constants as c
 
 
 class Goal(models.Model):
@@ -85,10 +86,13 @@ class Task(models.Model):
         related_name="tasks",
         on_delete=models.CASCADE
     )
-    is_done = models.BooleanField("Готова", default=False)
+    state = models.CharField(
+        max_length=20,
+        choices=c.STATE,
+        default=c.STATE.todo,
+    )
     description = models.TextField("Описание", blank=True, null=True)
     deadline = models.IntegerField("Дедлайн", blank=True, null=True)
-    planned = models.BooleanField("Запалнировано", default=False)
     importance = models.FloatField("Важность", blank=True, default=0)
     urgency = models.FloatField("Срочность", blank=True, default=0)
 

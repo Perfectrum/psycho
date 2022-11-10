@@ -62,14 +62,14 @@ export function Main() {
                 +
             </div>
             {
-            // <div className="left-menu">
-            //         <div className="items">
-            //          { listMenuItem("inbox.png",'Входящие', 'inbox') }
-            //          { listMenuItem("matrix.png", 'Матрица', 'matrix') }
-            //          { listMenuItem("goals.png",'Цели', 'goals') }
-            //          { listMenuItem("list.png", 'Задачи', 'main') }
-            //      </div>
-            // </div>
+            <div className="left-menu">
+                    <div className="items">
+                     { listMenuItem("inbox.png",'Входящие', 'inbox') }
+                     { listMenuItem("matrix.png", 'Матрица', 'matrix') }
+                     { listMenuItem("goals.png",'Цели', 'goals') }
+                     { listMenuItem("list.png", 'Задачи', 'main') }
+                 </div>
+            </div>
             }
             
             <div className="center">

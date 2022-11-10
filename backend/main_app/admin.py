@@ -28,6 +28,6 @@ class GoalAdmin(ModelAdmin):
 
 @admin.register(Task)
 class TaskAdmin(ModelAdmin):
-    list_display = ("id", "title", "user", "is_done", "deadline", "importance", "urgency",)
+    list_display = ("id", "title", "user", "deadline", "importance", "urgency",)
     search_fields = ("user__username", "user__first_name", "title")
     search_filter = ("is_done",)
