@@ -7,7 +7,7 @@ export function Goal(props) {
     return (
         <div className="goal-card">
             <div className='goal-card-right'>
-                <img src="star.png"/>
+                <img src="/star.png"/>
                 {name}
             </div>
             <div className="goal-center-card">
@@ -16,7 +16,7 @@ export function Goal(props) {
                 </div>
                 <div className='edit-goal'> 
                     <div className='edit-goal-tag'>
-                        <img src="./edit.png"></img>
+                        <img src="/edit.png"></img>
                         Редактировать
                     </div>
                 </div>

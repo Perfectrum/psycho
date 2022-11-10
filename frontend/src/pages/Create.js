@@ -11,7 +11,7 @@ export function Create() {
             <div 
                 className='card-creator-close'
                 onClick={() => navigate('/main')}
-            ><img src="close.png" /></div>
+            ><img src="/close.png" /></div>
             <CardCreator />
         </div>
     )

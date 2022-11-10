@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet, Link } from "react-router-dom";
 import { CardField } from "./compontents/CardField";
 import { Goals } from './Goals';
 import "./main.css"
@@ -19,14 +19,47 @@ function horizonMenuItem(name, selected) {
 }
 
 function listMenuItem(imagepath, name, href) {
-    return ( <div className="left-menu-list-item"> <img src={imagepath}/>
-    <a href={href}>{name}</a></div> )
+    return ( 
+        <Link to='board'>
+            <div className="left-menu-list-item"> 
+                <img src={imagepath}/>
+            </div>
+        </Link>
+    );
+}
+
+export function BoardPanel() {
+
+    const [ counter, updateCounter ] = useState(0);
+
+
+    function forceUpdate() {
+        updateCounter(counter + 1);
+    }
+
+    const cards = cardsManager.getCards();
+    cardsManager.callback(forceUpdate);
+
+
+
+    return (
+        <div className="main-page-card-list">
+            <CardField content={cards[0]} type='done' />
+            <CardField content={cards[1]} type='progress' />
+            <CardField content={cards[2]} type='todo' />
+            <div style={{display:'none'}}>{counter}</div>
+        </div>
+    );
+}
+
+export function GoalPanel() {
+    return (<Goals />);
 }
 
 export  function Main() {
 
-    const [ counter, updateCounter ] = useState(0);
-    const [ topButtons, _ ] = useState([
+   
+    const [ topButtons, updateTopButtons ] = useState([
         packTopButton("Все", null, true),
         packTopButton("Квант", cardsManager.BUCKETS.quant, false),
         packTopButton("День", cardsManager.BUCKETS.day, false),
@@ -35,15 +68,7 @@ export  function Main() {
         packTopButton("Год", cardsManager.BUCKETS.year, false)
     ]);
 
-
-    function forceUpdate() {
-        updateCounter(counter + 1);
-    }
-
-    const cards = cardsManager.getCards();
     const navigate = useNavigate();
-
-    cardsManager.callback(forceUpdate);
 
     function horizonMenuItem(button, idx) {
         const { name, value, selected } = button;
@@ -53,6 +78,7 @@ export  function Main() {
             }
             button.selected = true;
             cardsManager.setFilter(value);
+            updateTopButtons([...topButtons]);
         }} data-tooltip={name == 'Квант' ? "Минимальный промежуток времени (обычно ~20 минут)" : ""} className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
     }
 
@@ -62,40 +88,45 @@ export  function Main() {
                 +
             </div>
             {
-            <div className="left-menu">
-                    <div className="items">
-                        { listMenuItem("inbox.png",'Входящие', 'inbox') }
-                        { listMenuItem("matrix.png", 'Матрица', 'matrix') }
-                        { listMenuItem("goals.png",'Цели', 'goals') }
-                        { listMenuItem("list.png", 'Задачи', 'main') }
-                        {/* <Router>
-                            <nav>
-                                { listMenuItem("inbox.png",'Входящие', 'inbox') }
-                                { listMenuItem("matrix.png", 'Матрица', 'matrix') }
-                                <Link to = "/goals"> { listMenuItem("goals.png",'Цели', 'goals') }</Link>
-                                { listMenuItem("list.png", 'Задачи', 'main') }
-                            </nav>
-                        </Router>
-                        <Routes>
-                            <Route path="/goals" element={<Goals />} />
-                        </Routes> */}
-                 </div>
-            </div>
+            // <div className="left-menu">
+            //         <div className="items">
+            //             { listMenuItem("inbox.png",'', 'inbox') }
+            //             { listMenuItem("matrix.png", '', 'matrix') }
+            //             { listMenuItem("goals.png",'', 'goals') }
+            //             { listMenuItem("list.png", '', 'main') }
+            //             {/* <Router>
+            //                 <nav>
+            //                     { listMenuItem("inbox.png",'Входящие', 'inbox') }
+            //                     { listMenuItem("matrix.png", 'Матрица', 'matrix') }
+            //                     <Link to = "/goals"> { listMenuItem("goals.png",'Цели', 'goals') }</Link>
+            //                     { listMenuItem("list.png", 'Задачи', 'main') }
+            //                     { listMenuItem("inbox.png",'Входящие', 'inbox') }
+            //             { listMenuItem("matrix.png", 'Матрица', 'matrix') }
+            //             { listMenuItem("goals.png",'Цели', 'goals') }
+            //             { listMenuItem("list.png", 'Задачи', 'main') }
+            //                 </nav>
+            //             </Router>
+            //             <Routes>
+            //                 <Route path="/goals" element={<Goals />} />
+            //             </Routes> */}
+            //      </div>
+            // </div>
             }
             
             <div className="center">
+                <div className="items">
+                        { listMenuItem("/inbox.png",'', 'inbox') }
+                        { listMenuItem("/matrix.png", '', 'matrix') }
+                        { listMenuItem("/goals.png",'', 'goals') }
+                        { listMenuItem("/list.png", '', 'main') }
+                 </div>
                 <div className="main-page-tabs-list">
                     {topButtons.map(horizonMenuItem)}
                 </div>
                 <div className="main-page-content">
-                    <div className="main-page-card-list">
-                       <CardField content={cards[0]} type='done' />
-                       <CardField content={cards[1]} type='progress' />
-                       <CardField content={cards[2]} type='todo' />
-                    </div>
+                    <Outlet />
                 </div>
             </div>
-        <div style={{display: 'none'}}>{counter}</div>
         </div>
     );
 }

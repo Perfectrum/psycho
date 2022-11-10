@@ -1,6 +1,6 @@
 .flex-container {
   padding: 20px;
-  height: calc(100vh - 40px);
+  min-height: calc(100vh - 40px);
   width: calc(100vw - 40px);
   display: flex;
 
@@ -31,10 +31,6 @@
 
   transition: ease-out 0.2s;
   overflow: visible;
-}
-
-.main-page-card-list {
-  width: 100%;
 }
 
 .add-button:hover {
@@ -90,13 +86,19 @@
 }
 
 .left-menu {
-  width: 160px;
+  width: 64px;
   padding: 20px;
   display: flex;
   margin-top: 100px;
   align-items: flex-start;
   justify-content: center;
   
+}
+
+@media (max-width: 1200px) {
+  .left-menu {
+    display: none;
+  }
 }
 
 .center {
@@ -155,10 +157,18 @@
 }
 
 .main-page-card-list {
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap:nowrap;
 
   justify-content: center;
+}
+
+@media (max-width: 1200px)  {
+    .main-page-card-list {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
 }
 
 .right-bar {
@@ -191,9 +201,6 @@
   flex-direction: column;
   font-weight: 300;
   font-size: 32px;
-
-  border-radius: 20px;
-
   overflow: hidden;
 }
 
@@ -202,11 +209,10 @@
 
 
 .left-menu-list-item {
-  display: flex;
+  display: block;
   
-  text-align: right;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 50%;
   cursor: pointer;
 
   font-size: 20px;
@@ -215,25 +221,18 @@
   transition: 0.1s;
   background-color: #f1f1f1;
   margin-top: 10px;
-
-  border-radius: 10px;
 }
 
 .left-menu-list-item:hover {
   background-color: #d1d1d1;
 }
-.left-menu-list-item img {
-  align-self: flex-start;
-  
-  margin-right: 4px;
-}
-
 
 
 
 .items a {
   color: black; 
   padding: 1px;
+  align-self: center;
   text-decoration: none; 
 }
 
@@ -243,9 +242,7 @@
 }
 
 .left-menu-list-item img {
-  align-self: flex-start;
-
-  margin-right: 4px;
+  align-self: center;
 }
 
 
