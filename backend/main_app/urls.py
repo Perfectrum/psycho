@@ -8,6 +8,7 @@ from .views import (
     TaskCreateAPIView,
     InboxPatchAPIView,
     TaskListAPIView,
+    TaskUpdateAPIView,
 )
 
 
@@ -19,5 +20,6 @@ urlpatterns = [
     path("goals/create_goal/", GoalCreateAPIView.as_view(), name="create_goal"),
     path("goals/delete/<int:pk>/", GoalDeleteApiView.as_view(), name="delete_goal"),
     path("task/create/", TaskCreateAPIView.as_view(), name="create_task"),
-    path("task/list/", TaskListAPIView.as_view(), name="tasks_list_all")
+    path("task/list/", TaskListAPIView.as_view(), name="tasks_list_all"),
+    path("task/patch/<int:pk>/", TaskUpdateAPIView.as_view(), name="tasks_patch"),
 ]
