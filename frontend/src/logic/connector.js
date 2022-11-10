@@ -59,7 +59,7 @@ export function isAuthorized() {
     return token !== null;
 }
 
-export async function registerNewUser({ username, first_name, password, password2 }) {
+export async function registerNewUser({username, first_name, password, password2}) {
     return await execPost('/api/register/', {
         username,
         first_name,

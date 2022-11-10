@@ -20,9 +20,10 @@ class InboxPatchSerializer(serializers.Serializer):
 
 
 class TaskSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Task
-        fields = ("title", "reference", "goals", "horizon", "is_done", "description", "deadline", "importance", "urgency")
+        fields = ("title", "reference", "state", "goals", "horizon", "description", "deadline", "importance", "urgency")
 
 
 class GoalSerializer(serializers.ModelSerializer):
