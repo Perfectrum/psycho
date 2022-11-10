@@ -20,7 +20,7 @@ class InboxPatchSerializer(serializers.Serializer):
 
 
 class TaskSerializer(serializers.ModelSerializer):
-
+    goals = serializers.SlugRelatedField(many=True, read_only=True, slug_field="title")
     class Meta:
         model = Task
         fields = ("title", "reference", "state", "goals", "horizon", "description", "deadline", "importance", "urgency")
