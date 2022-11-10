@@ -20,20 +20,34 @@ function horizonMenuItem(name, selected) {
 
 function listMenuItem(imagepath, name, href) {
     return ( 
-        <div className="left-menu-list-item"> 
-            <img src={imagepath}/>
-            <Link to='board'>{name}</Link>
-        </div>
+        <Link to='board'>
+            <div className="left-menu-list-item"> 
+                <img src={imagepath}/>
+            </div>
+        </Link>
     );
 }
 
 export function BoardPanel() {
+
+    const [ counter, updateCounter ] = useState(0);
+
+
+    function forceUpdate() {
+        updateCounter(counter + 1);
+    }
+
     const cards = cardsManager.getCards();
+    cardsManager.callback(forceUpdate);
+
+
+
     return (
         <div className="main-page-card-list">
             <CardField content={cards[0]} type='done' />
             <CardField content={cards[1]} type='progress' />
             <CardField content={cards[2]} type='todo' />
+            <div style={{display:'none'}}>{counter}</div>
         </div>
     );
 }
@@ -44,8 +58,8 @@ export function GoalPanel() {
 
 export  function Main() {
 
-    const [ counter, updateCounter ] = useState(0);
-    const [ topButtons, _ ] = useState([
+   
+    const [ topButtons, updateTopButtons ] = useState([
         packTopButton("Все", null, true),
         packTopButton("Квант", cardsManager.BUCKETS.quant, false),
         packTopButton("День", cardsManager.BUCKETS.day, false),
@@ -54,14 +68,7 @@ export  function Main() {
         packTopButton("Год", cardsManager.BUCKETS.year, false)
     ]);
 
-
-    function forceUpdate() {
-        updateCounter(counter + 1);
-    }
-
     const navigate = useNavigate();
-
-    cardsManager.callback(forceUpdate);
 
     function horizonMenuItem(button, idx) {
         const { name, value, selected } = button;
@@ -71,6 +78,7 @@ export  function Main() {
             }
             button.selected = true;
             cardsManager.setFilter(value);
+            updateTopButtons([...topButtons]);
         }} data-tooltip={name == 'Квант' ? "Минимальный промежуток времени (обычно ~20 минут)" : ""} className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
     }
 
@@ -106,6 +114,12 @@ export  function Main() {
             }
             
             <div className="center">
+                <div className="items">
+                        { listMenuItem("/inbox.png",'', 'inbox') }
+                        { listMenuItem("/matrix.png", '', 'matrix') }
+                        { listMenuItem("/goals.png",'', 'goals') }
+                        { listMenuItem("/list.png", '', 'main') }
+                 </div>
                 <div className="main-page-tabs-list">
                     {topButtons.map(horizonMenuItem)}
                 </div>
@@ -113,7 +127,6 @@ export  function Main() {
                     <Outlet />
                 </div>
             </div>
-        <div style={{display: 'none'}}>{counter}</div>
         </div>
     );
 }
