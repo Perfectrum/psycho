@@ -95,6 +95,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  
 }
 
 .center {
@@ -183,6 +184,8 @@
 }
 
 .items {
+  font-weight: 300;
+  font-size: 32px;
   display: flex;
   flex-direction: column;
   font-weight: 300;
@@ -190,20 +193,25 @@
 
   border-radius: 20px;
 
-
   overflow: hidden;
 }
 
+
+
+
+
 .left-menu-list-item {
+  display: flex;
+  
+  text-align: right;
   padding: 10px;
-  border-radius: 50%;
+  border-radius: 10px;
   cursor: pointer;
 
   font-size: 20px;
 
   user-select: none;
   transition: 0.1s;
-
   background-color: #f1f1f1;
   margin-top: 10px;
 
@@ -213,9 +221,17 @@
 .left-menu-list-item:hover {
   background-color: #d1d1d1;
 }
+.left-menu-list-item img {
+  align-self: flex-start;
+  
+  margin-right: 4px;
+}
+
+
 
 
 .items a {
+  
   background-color: #eee;  
   color: black; 
   display: block;

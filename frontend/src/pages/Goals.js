@@ -1,4 +1,3 @@
-import { Goal } from "./compontents/goal";
 import { GoalField } from "./compontents/GoalField";
 
 

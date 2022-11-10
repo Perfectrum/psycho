@@ -5,6 +5,7 @@ import "./main.css"
 import * as cardsManager from '../logic/cards';
 import { useState } from "react";
 
+
 function packTopButton(name, value, selected) {
     return {
         name,
@@ -33,7 +34,8 @@ export function Main() {
         packTopButton("Месяц", cardsManager.BUCKETS.month, false),
         packTopButton("Год", cardsManager.BUCKETS.year, false)
     ]);
-    
+
+
     function forceUpdate() {
         updateCounter(counter + 1);
     }
@@ -59,7 +61,6 @@ export function Main() {
             <div onClick={() => navigate('/create')} className="add-button">
                 +
             </div>
-
             {
             // <div className="left-menu">
             //         <div className="items">
