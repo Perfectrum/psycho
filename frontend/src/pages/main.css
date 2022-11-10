@@ -89,7 +89,8 @@
   width: 160px;
   padding: 20px;
   display: flex;
-  align-items: center;
+  margin-top: 100px;
+  align-items: flex-start;
   justify-content: center;
   
 }
@@ -241,12 +242,14 @@
 
 
 .items a {
-  
-  background-color: #eee;  
   color: black; 
-  display: block;
   padding: 1px;
   text-decoration: none; 
+}
+
+.items a:hover {
+
+  background-color: #d1d1d1;
 }
 
 .left-menu-list-item img {
@@ -258,9 +261,7 @@
 
 
 
-.items a:hover {
-  background-color: #ccc; 
-}
+
 
 
 ul {

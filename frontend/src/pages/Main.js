@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { CardField } from "./compontents/CardField";
+import { Goals } from './Goals';
 import "./main.css"
-
 import * as cardsManager from '../logic/cards';
 import { useState } from "react";
 
@@ -27,7 +27,7 @@ function listMenuItem(imagepath, name, href) {
     );
 }
 
-export function Main() {
+export  function Main() {
 
     const [ counter, updateCounter ] = useState(0);
     const [ topButtons, _ ] = useState([
@@ -68,10 +68,21 @@ export function Main() {
             {
             <div className="left-menu">
                     <div className="items">
-                     { listMenuItem("inbox.png",'Входящие', 'inbox') }
-                     { listMenuItem("matrix.png", 'Матрица', 'matrix') }
-                     { listMenuItem("goals.png",'Цели', 'goals') }
-                     { listMenuItem("list.png", 'Задачи', 'main') }
+                        { listMenuItem("inbox.png",'Входящие', 'inbox') }
+                        { listMenuItem("matrix.png", 'Матрица', 'matrix') }
+                        { listMenuItem("goals.png",'Цели', 'goals') }
+                        { listMenuItem("list.png", 'Задачи', 'main') }
+                        {/* <Router>
+                            <nav>
+                                { listMenuItem("inbox.png",'Входящие', 'inbox') }
+                                { listMenuItem("matrix.png", 'Матрица', 'matrix') }
+                                <Link to = "/goals"> { listMenuItem("goals.png",'Цели', 'goals') }</Link>
+                                { listMenuItem("list.png", 'Задачи', 'main') }
+                            </nav>
+                        </Router>
+                        <Routes>
+                            <Route path="/goals" element={<Goals />} />
+                        </Routes> */}
                  </div>
             </div>
             }
