@@ -29,7 +29,7 @@ export function Login() {
         connector.login(values)
             .then((res) => {
                 if (!res) return console.error("ERROR!");
-                navigate('/main');
+                navigate('/main/board');
             })
     }
 

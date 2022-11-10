@@ -3,16 +3,6 @@
     display: inline-flex;
     gap : 7px;
     align-self: flex-start;
-    margin-top: 100px;
-    margin-left: 20px;
-    width: 98%;
-    /* margin-top: 100px;
-    align-self: flex-start;
-    justify-content: space-between;
-    gap : 1px;
-    flex-direction: row;
-    width: 100%;
-    padding: 30px; */
     flex-wrap:  wrap;
     /* flex-basis: auto; */
 }
