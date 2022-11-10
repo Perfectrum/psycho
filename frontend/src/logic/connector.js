@@ -1,12 +1,14 @@
 
 import axios from 'axios';
 
-let token = null;
-let tokenRefresh = null;
+export let token = null;
+export let tokenRefresh = null;
 
 async function execPost(url, body) {
 
     try {
+
+        fromLocalStorage();
         const tokenParams = token === null ? {} : {
             headers: {
                 'Authorization' : `Bearer ${token}`
@@ -14,6 +16,7 @@ async function execPost(url, body) {
         };
 
         // console.log(tokenParams);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
         const res = await axios.post(url, body, { 'Content-Type' : 'application/json', ...tokenParams });
         return res.data;
@@ -25,10 +28,13 @@ async function execPost(url, body) {
 
 async function execDelete(url, body) {
     try {
+
+        fromLocalStorage();
         const tokenParams = token === null ? {} : {
             'Authorization' : `Bearer ${token}`
         };
 
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         const res = await axios.delete(url, body, { 'Content-Type' : 'application/json', ...tokenParams });
         return res.data;
     } catch (ex) {
@@ -39,13 +45,16 @@ async function execDelete(url, body) {
 
 async function execGet(url, body) {
     try {
+
+        fromLocalStorage();
+
         const tokenParams = token === null ? {} : {
             headers: {
                     'Authorization' : `Bearer ${token}`
                 }
         };
 
-        // console.log(tokenParams);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
         const res = await axios.get(url, body, {...tokenParams });
         return res.data;
@@ -53,6 +62,17 @@ async function execGet(url, body) {
         console.error(ex.response ? ex.response.data : ex);
         return null;
     }
+}
+
+
+export async function tryInitialize() {
+    localStorage.setItem("token", token);
+    localStorage.setItem("refreshToken", tokenRefresh);
+}
+
+export async function fromLocalStorage() {
+    token = localStorage.getItem("token");
+    tokenRefresh = localStorage.getItem("refreshToken");
 }
 
 export function isAuthorized() {
@@ -65,6 +85,7 @@ export async function registerNewUser({username, first_name, password, password2
         first_name,
         password,
         password2
+
     });
 }
 
@@ -81,6 +102,8 @@ export async function login({ username, password }) {
     tokenRefresh = refresh;
 
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+    tryInitialize();
 
     return true;
 }
