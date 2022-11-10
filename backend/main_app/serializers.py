@@ -44,8 +44,32 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = ("id", "title", "reference", "state", "goals", "horizon", "description", "deadline", "importance", "urgency")
 
 
-class GoalSerializer(serializers.ModelSerializer):
-
+class GoalNestedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Goal
-        fields = ("title", "description")
+        fields = ("id",)
+
+
+class GoalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Goal
+        fields = ("id", "title", "description")
+
+
+class TaskCreateSerializer(serializers.ModelSerializer):
+    goals = serializers.ListField(child=serializers.IntegerField())
+
+    class Meta:
+        model = Task
+        fields = ("title", "reference", "state", "goals", "horizon", "description", "deadline", "importance", "urgency")
+
+    def create(self, validated_data):
+        goal_ids = validated_data.pop("goals")
+
+        new_task = Task.objects.create(**validated_data)
+
+        if goal_ids:
+            for goal_id in goal_ids:
+                new_task.goals.add(goal_id)
+        new_task.save()
+        return new_task
