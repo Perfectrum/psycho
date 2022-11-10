@@ -1,6 +1,7 @@
 import { useNavigate, Outlet, Link } from "react-router-dom";
 import { CardField } from "./compontents/CardField";
 import { Goals } from './Goals';
+import { Matrix } from "./compontents/Matrix";
 import "./main.css"
 import * as cardsManager from '../logic/cards';
 import { useState } from "react";
@@ -20,12 +21,16 @@ function horizonMenuItem(name, selected) {
 
 function listMenuItem(imagepath, name, href) {
     return ( 
-        <Link to='board'>
+        <Link to= {href}>
             <div className="left-menu-list-item"> 
                 <img src={imagepath}/>
             </div>
         </Link>
     );
+}
+
+export function Matrixpanel(){
+    return ( <Matrix/> );
 }
 
 export function BoardPanel() {
@@ -118,7 +123,7 @@ export  function Main() {
                         { listMenuItem("/inbox.png",'', 'inbox') }
                         { listMenuItem("/matrix.png", '', 'matrix') }
                         { listMenuItem("/goals.png",'', 'goals') }
-                        { listMenuItem("/list.png", '', 'main') }
+                        { listMenuItem("/list.png", '', 'tasks') }
                  </div>
                 <div className="main-page-tabs-list">
                     {topButtons.map(horizonMenuItem)}
