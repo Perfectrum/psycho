@@ -1,13 +1,13 @@
 .movableTask {
     cursor: pointer;
     user-select: none;
-    margin: 0.5em;
+    width: auto;
 }
 
 .taskIcon {
-    width: 80px;
-    height: 80px;
-    font-size: 32px;
+    position: absolute;
+    font-size: 40px;
+    z-index: 5;
 }
 
 .taskLabel {

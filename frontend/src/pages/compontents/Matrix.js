@@ -34,8 +34,10 @@ export function Matrix() {
                 { matrixDecorItem("EARLIER THE BETTER!", "earlierBetter") }
                 { matrixDecorItem("TO DO OR NOT TO DO...", "doOrNo") }
             </div>
-            { MovableTask("Proof of concept", 500, 300) }
-            { MovableTask("Proof of concept 2", 500, 300) }
+
+            { MovableTask("Геншин", 500, 300, 0.2, 0.25) }
+            { MovableTask("Снять видео", 500, 300, 0.6, 0.4) }
+            { MovableTask("Поспать", 500, 300, 0.8, 0.9) }
         </div>
     );
 }

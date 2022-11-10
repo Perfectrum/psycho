@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import { DragMove } from "./DragMove";
 
 
-export function MovableTask(label, fieldWidth, fieldHeight) {
+export function MovableTask(
+  label, fieldWidth, fieldHeight, importance=0.5, urgency=0.5) {
 
     const [translate, setTranslate] = useState({
-        x: fieldWidth/2,
-        y: -fieldHeight/2
+        x: fieldWidth * (1 - urgency),
+        y: -fieldHeight * importance
       });
     
       const handleDragMove = (e) => {

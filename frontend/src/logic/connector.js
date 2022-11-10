@@ -122,11 +122,6 @@ export async function getAllInboxes( )
     return await execGet('/api/inbox/list/');
 }
 
-// export async function getAllTasks()
-// {
-//     return await execGet('/api/task/list/')
-// }
-
 
 export async function createInboxItem (  title, description)
 {
@@ -201,15 +196,29 @@ export async function getAllTasks() {
 }
 
 
-export async function createTask (title, importance, urgency, horizon, state, reference=null) {
+export async function createTask (title, importance, urgency, horizon, state, reference=null, goals=null) {
     const response = execPost('/api/task/create/', {
         title,
         importance,
         urgency,
         horizon,
         state,
-        reference
+        reference,
+        goals
     });
 
+    return getAllTasks();
+}
+
+
+export async function patchTask (task_id, title, description, state, importance, urgency) {
+    const response = execPost('/api/task/patch/' + task_id + '/', {
+        state,
+        importance,
+        urgency,
+        title,
+        description
+    });
+    
     return getAllTasks();
 }
