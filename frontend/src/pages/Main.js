@@ -21,10 +21,8 @@ function horizonMenuItem(name, selected) {
 
 function listMenuItem(imagepath, name, href) {
     return ( 
-        <Link to= {href}>
-            <div className="left-menu-list-item"> 
-                <img src={imagepath}/>
-            </div>
+        <Link className="left-menu-list-item" to={href}>
+            <img src={imagepath}/>
         </Link>
     );
 }
@@ -37,33 +35,6 @@ export function BoardPanel() {
 
     const [ counter, updateCounter ] = useState(0);
 
-
-    function forceUpdate() {
-        updateCounter(counter + 1);
-    }
-
-    const cards = cardsManager.getCards();
-    cardsManager.callback(forceUpdate);
-
-
-
-    return (
-        <div className="main-page-card-list">
-            <CardField content={cards[0]} type='done' />
-            <CardField content={cards[1]} type='progress' />
-            <CardField content={cards[2]} type='todo' />
-            <div style={{display:'none'}}>{counter}</div>
-        </div>
-    );
-}
-
-export function GoalPanel() {
-    return (<Goals />);
-}
-
-export  function Main() {
-
-   
     const [ topButtons, updateTopButtons ] = useState([
         packTopButton("Все", null, true),
         packTopButton("Квант", cardsManager.BUCKETS.quant, false),
@@ -73,7 +44,13 @@ export  function Main() {
         packTopButton("Год", cardsManager.BUCKETS.year, false)
     ]);
 
-    const navigate = useNavigate();
+
+    function forceUpdate() {
+        updateCounter(counter + 1);
+    }
+
+    const cards = cardsManager.getCards();
+    cardsManager.callback(forceUpdate);
 
     function horizonMenuItem(button, idx) {
         const { name, value, selected } = button;
@@ -87,47 +64,40 @@ export  function Main() {
         }} data-tooltip={name == 'Квант' ? "Минимальный промежуток времени (обычно ~20 минут)" : ""} className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
     }
 
+    return (
+        <div className="main-page-big-width">
+            <div className="main-page-tabs-list">
+                {topButtons.map(horizonMenuItem)}
+            </div>
+            <div className="main-page-card-list">
+                <CardField content={cards[0]} type='done' />
+                <CardField content={cards[1]} type='progress' />
+                <CardField content={cards[2]} type='todo' />
+            </div>
+        </div>
+    );
+}
+
+export function GoalPanel() {
+    return (<Goals />);
+}
+
+export  function Main() {
+
+    const navigate = useNavigate();
+
     return ( 
         <div className="flex-container">
             <div onClick={() => navigate('/create')} className="add-button">
                 +
-            </div>
-            {
-            // <div className="left-menu">
-            //         <div className="items">
-            //             { listMenuItem("inbox.png",'', 'inbox') }
-            //             { listMenuItem("matrix.png", '', 'matrix') }
-            //             { listMenuItem("goals.png",'', 'goals') }
-            //             { listMenuItem("list.png", '', 'main') }
-            //             {/* <Router>
-            //                 <nav>
-            //                     { listMenuItem("inbox.png",'Входящие', 'inbox') }
-            //                     { listMenuItem("matrix.png", 'Матрица', 'matrix') }
-            //                     <Link to = "/goals"> { listMenuItem("goals.png",'Цели', 'goals') }</Link>
-            //                     { listMenuItem("list.png", 'Задачи', 'main') }
-            //                     { listMenuItem("inbox.png",'Входящие', 'inbox') }
-            //             { listMenuItem("matrix.png", 'Матрица', 'matrix') }
-            //             { listMenuItem("goals.png",'Цели', 'goals') }
-            //             { listMenuItem("list.png", 'Задачи', 'main') }
-            //                 </nav>
-            //             </Router>
-            //             <Routes>
-            //                 <Route path="/goals" element={<Goals />} />
-            //             </Routes> */}
-            //      </div>
-            // </div>
-            }
-            
+            </div>            
             <div className="center">
                 <div className="items">
                         { listMenuItem("/inbox.png",'', 'inbox') }
                         { listMenuItem("/matrix.png", '', 'matrix') }
                         { listMenuItem("/goals.png",'', 'goals') }
-                        { listMenuItem("/list.png", '', 'tasks') }
+                        { listMenuItem("/list.png", '', 'board') }
                  </div>
-                <div className="main-page-tabs-list">
-                    {topButtons.map(horizonMenuItem)}
-                </div>
                 <div className="main-page-content">
                     <Outlet />
                 </div>

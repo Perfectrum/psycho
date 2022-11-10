@@ -6,7 +6,8 @@ import { Goals } from './pages/Goals';
 
 import {
   Routes,
-  Route
+  Route,
+  Navigate
 } from "react-router-dom";
 import { Test } from './pages/Test';
 
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path='create' element={(<Create />)}></Route>
         <Route path='main' element={(<Main />)}>
+          <Route index element={(<Navigate to='board' redirect />)} />
           <Route path='board' element={(<BoardPanel />)} />
           <Route path='goals' element={(<GoalPanel />)} />
           <Route path='matrix' element={(<Matrixpanel />)} />
