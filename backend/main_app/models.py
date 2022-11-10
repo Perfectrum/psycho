@@ -69,7 +69,7 @@ class Task(models.Model):
         "self",
         verbose_name="Родитель",
         related_name="tasks",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         null=True,
         blank=True
     )
