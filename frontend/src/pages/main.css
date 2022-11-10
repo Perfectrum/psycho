@@ -139,7 +139,7 @@
   padding: 0.5em;
   pointer-events: none; 
   opacity: 0; 
-  transition: 1s; 
+  transition: 0.2s; 
  } 
  [data-tooltip]:hover::after {
   opacity: 1; 
