@@ -21,7 +21,7 @@ function horizonMenuItem(name, selected) {
 
 function listMenuItem(imagepath, name, href) {
     return ( 
-        <Link to= {href}>
+        <Link to={href}>
             <div className="left-menu-list-item"> 
                 <img src={imagepath}/>
             </div>
@@ -123,7 +123,7 @@ export  function Main() {
                         { listMenuItem("/inbox.png",'', 'inbox') }
                         { listMenuItem("/matrix.png", '', 'matrix') }
                         { listMenuItem("/goals.png",'', 'goals') }
-                        { listMenuItem("/list.png", '', 'tasks') }
+                        { listMenuItem("/list.png", '', 'board') }
                  </div>
                 <div className="main-page-tabs-list">
                     {topButtons.map(horizonMenuItem)}
