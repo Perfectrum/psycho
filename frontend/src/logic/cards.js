@@ -1,4 +1,6 @@
 
+import * as connector from './connector';
+
 const bucket_eq = [
     'quant', 'day', 'week', 'month', 'year'
 ];
@@ -106,7 +108,7 @@ function remove(arr, item) {
     arr.splice(idx, 1);
 }
 
-export function move(card) {
+export async function move(card) {
     if (FAKE_CARDS[2].includes(card)) {
         remove(FAKE_CARDS[2], card);
         FAKE_CARDS[1].push(card);
@@ -121,12 +123,13 @@ export function move(card) {
     }
 }
 
-export function getCards() {
-   return FAKE_CARDS.map(
+export async function getCards() {
+    console.log('REQ1');
+    return (await connector.getAllTasks()).map(
         e => e.filter(x => 
             (filter === null || x.bucket === filter) 
             && (goalFilter === null || x.tags.includes(goalFilter)
-        ))
+        )).map(x => { x.bucket = bucket_eq[x.bucket]; return x; })
     );
 }
 
@@ -144,8 +147,9 @@ export function setGoalFilter(goal) {
     callbackFunc();
 }
 
-export function addCard(name, desc, bucket, parent, tags) {
+export async function addCard(name, desc, bucket, parent, tags) {
 
+    /*
     let found = false;
     let fullName = [];
     if (parent !== null) {
@@ -161,6 +165,11 @@ export function addCard(name, desc, bucket, parent, tags) {
             }
         }
     }
+    */
+
+    await connector.createTask(name, 0, 0, bucket_eq.indexOf(bucket), 'todo', parent);
+
+    /*
 
     console.log(tags);
     FAKE_CARDS[2].push({
@@ -173,6 +182,8 @@ export function addCard(name, desc, bucket, parent, tags) {
         fullName,
         tags
     });
+
+    */
 
     callbackFunc();
 }

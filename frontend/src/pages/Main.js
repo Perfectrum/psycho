@@ -4,7 +4,7 @@ import { Goals } from './Goals';
 import { Matrix } from "./compontents/Matrix";
 import "./main.css"
 import * as cardsManager from '../logic/cards';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 function packTopButton(name, value, selected) {
@@ -34,6 +34,7 @@ export function Matrixpanel(){
 export function BoardPanel() {
 
     const [ counter, updateCounter ] = useState(0);
+    const [ cards, loadCards ] = useState([[], [], []]);
 
     const [ topButtons, updateTopButtons ] = useState([
         packTopButton("Все", null, true),
@@ -44,12 +45,20 @@ export function BoardPanel() {
         packTopButton("Год", cardsManager.BUCKETS.year, false)
     ]);
 
+    useEffect(() => {
+        console.log('EFFECT!');
+        forceUpdate();
+    }, []);
 
     function forceUpdate() {
-        updateCounter(counter + 1);
+        cardsManager.getCards().then((res) => {
+            if (res) {
+                loadCards(res);
+                updateCounter(counter + 1);
+            }
+        });
     }
 
-    const cards = cardsManager.getCards();
     cardsManager.callback(forceUpdate);
 
     function horizonMenuItem(button, idx) {

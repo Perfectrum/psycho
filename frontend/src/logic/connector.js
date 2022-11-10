@@ -180,29 +180,29 @@ export async function getAllTasks() {
 
     function convertTask (task, _, tasksList) {
         return {
-            "id": task["id"],
-            "name": task["title"],
-            "desc": task["description"],
-            "parent": task["reference"],
-            "fullName": task.fullName,
-            "tags": task["goals"],
-            "hasChild": tasksList
+            id: task["id"],
+            name: task["title"],
+            desc: task["description"],
+            parent: task["reference"],
+            fullName: task.fullName,
+            tags: task["goals"],
+            hasChild: tasksList
                 .map( cur => cur["reference"] === task["id"] )
                 .reduce((x, y) => x || y, false),
-            "bucket": task["horizon"]
+            bucket: task["horizon"]
         }
     }
    
     return [
-        response.filter( task => task["state"] === "todo" ).map( convertTask ),
+        response.filter( task => task["state"] === "done" ).map( convertTask ),
         response.filter( task => task["state"] === "progress" ).map( convertTask ),
-        response.filter( task => task["state"] === "done" ).map( convertTask )
+        response.filter( task => task["state"] === "todo" ).map( convertTask )
     ];
 }
 
 
 export async function createTask (title, importance, urgency, horizon, state, reference=null) {
-    const response = execPost('/api/task/create/', {
+    return await execPost('/api/task/create/', {
         title,
         importance,
         urgency,
@@ -210,6 +210,4 @@ export async function createTask (title, importance, urgency, horizon, state, re
         state,
         reference
     });
-
-    return getAllTasks();
 }
