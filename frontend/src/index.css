@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #ffffff;
+  overflow-x: hidden;
+
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+p {
+  line-height: 1.2em;
+}
+
+.logo-small img{
+  width: 52px;
+  height: 52px;
+}
+
+.logo-middle {
+  text-align: center;
+}
+
+.logo-middle img {
+  width: 100px;
+  height: 100px;
+}
+
+.app-page {
+  width: 100vw;
+  height: 100vh;
+}
+
+input {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+textarea {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.base-form input {
+  display: block;
+  padding:  12px 20px 12px 20px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: #f1f1f1;
+  margin-top: 10px;
+  width: calc(100% - 40px);
+}
+
+.base-form button {
+  height: 45px;
+  border-radius: 8px;
+
+  border: none;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.button-section {
+  padding-top: 20px;
+  text-align: center;
+}
+
+.button-section button:first-child {
+  margin-top: 0;
+}
+
+.button-section button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.primary-button {
+  background-color: #24202c;
+  color: #f1f1f1;
+  font-weight: 500;
+}
+
+.secondary-button {
+  background-color: #f1f1f1;
+  color: #24202c;
+  font-weight: 500;
+}
+
+.primary-button:hover {
+  background-color: #3d3847;
+}
+
+.secondary-button:hover {
+  background-color: #dedede;
+}
+
+.card-creator-close img{
+  width: 32px;
+  height: 32px;
+}
+
+.card-creator-close {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+
+  background-color: transparent;
+  transition: ease-out 0.2s;
+  cursor: pointer;
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+
+  transform: rotate(0deg);
+}
+
+.card-creator-close:hover {
+  background-color: #f1f1f1;
+  transform: rotate(90deg);
+}
+

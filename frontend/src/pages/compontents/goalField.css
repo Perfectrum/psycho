@@ -1,0 +1,16 @@
+
+.goal-field {
+    display: inline-flex;
+    gap : 7px;
+    align-self: flex-start;
+    flex-wrap:  wrap;
+    /* flex-basis: auto; */
+}
+.goal-field > div {
+    margin: 1px;
+  }
+  
+.goal-field goal-card {
+    align-self: flex-start;
+    margin-top: 2px;
+} 

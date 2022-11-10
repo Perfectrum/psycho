@@ -1,0 +1,22 @@
+
+.register-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.register-main-form {
+    width: 100%;
+    max-width: 500px;
+}
+
+.register-main-form-padding {
+    padding: 40px;
+}
+
+.register-mar {
+    margin-top: 30px;
+}

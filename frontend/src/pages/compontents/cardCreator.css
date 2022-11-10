@@ -1,0 +1,189 @@
+.card-creator-main {
+    padding: 40px;
+    width: calc(100% - 40px);
+    max-width: 600px;
+
+    position: relative;
+    transition: cubic-bezier(.49,-0.01,.09,.99) 0.5s;
+}
+
+.card-creator-main-h1 {
+    font-weight: 600;
+    font-size: 32px;
+
+    padding: 20px 10px 20px 10px;
+    width: calc(100% - 20px);
+
+    border: none;
+    outline: none;
+
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.card-creator-description {
+    font-size: 16px;
+
+    padding: 30px 10px 20px 10px;
+
+    max-width: calc(100% - 20px);
+    min-width: calc(100% - 20px);
+    width: calc(100% - 20px);
+
+    max-height: 80px;
+    min-height: 80px;
+
+    resize: none;
+    border: none;
+    outline: none;
+
+}
+
+.card-creator-buckets {
+    display: flex;
+    flex-wrap: wrap;
+
+    margin-bottom: 20px;
+}
+
+.target-bucker {
+    margin-top: 10px;
+    margin-right: 10px;
+
+    background-color: #f1f1f1;
+    color: #000000;
+    border-radius: 20px;
+    padding: 10px 20px 10px 20px;
+    text-align: center;
+
+    user-select: none;
+    cursor: pointer;
+
+    transition: 0.1s;
+}
+
+.target-bucker:hover {
+    background-color: #e1e1e1;
+}
+
+.target-bucker-selected {
+    color: #ffffff;
+    background: #030303;
+}
+
+.target-bucker-disabled {
+    text-decoration: line-through;
+    background-color: transparent;
+}
+
+.target-bucker-disabled:hover {
+    text-decoration: line-through;
+    background-color: transparent;
+}
+
+.target-bucker-selected:hover {
+    color: #ffffff;
+    background: #030303;
+}
+
+.show-amination {
+    height: fit-content;
+    animation: show-opacity 0.5s cubic-bezier(.49,-0.01,.09,.99);
+}
+
+@keyframes show-opacity {
+    from {
+        max-height: 0;
+        transform: translateY(50px);
+        opacity: 0.0;
+    }
+
+    20% {
+        opacity: 0.0;
+    }
+
+    to {
+        max-height: 400px;
+        transform: translateY(0);
+        opacity: 1.0;
+    }
+}
+
+.card-creator-table-card {
+    display: flex;
+    padding: 10px;
+}
+
+.card-table-right {
+    width: 24px;
+    padding-right: 10px;
+    padding-top: 5px;
+}
+
+.card-table-right img {
+    width: 24px;
+    height: 24px;
+    transform: rotate(-90deg);
+}
+
+.card-table-name {
+    font-weight: 600;
+}
+
+.card-table-desc {
+    font-weight: 300;
+}
+
+.card-table-info {
+    padding-top: 10px;
+}
+
+.card-table-info-tag {
+    display: inline-flex;
+
+    align-items: flex-end;
+    color: #808080;
+
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.card-table-info-tag img {
+    width: 18px;
+    height: 18px;
+    margin-right: 3px;
+}
+
+.card-creator-top {
+    margin-top: 20px;
+}
+
+.card-creator-panel {
+    padding-top: 30px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.add-card-button {
+    border: none;
+    outline: none;
+
+    width: 100px;
+    padding: 10px 0 12px 0;
+
+    border-radius: 20px;
+
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(38deg, rgba(176,53,238,1) 18%, rgba(232,24,194,1) 65%);
+
+    transition: 0.2s;
+
+    font-size: 14px;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.target-target-selected {
+    background: linear-gradient(38deg, rgba(62,206,210,1) 29%, rgba(154,44,223,1) 82%);
+    color: #ffffff;
+}

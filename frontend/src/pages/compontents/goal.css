@@ -1,0 +1,111 @@
+/* 
+.goal-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+    height: 200px;
+    border-radius: 10px;
+
+    background-color: #f1f1f1;
+
+    width: calc(100% - 40px);
+    max-width: 500px;
+    padding: 20px;
+
+    cursor: pointer;
+} */
+
+.goal-card{
+    
+    flex-direction: column;
+
+    width: 400px;
+    background-color: #f1f1f1;
+
+    display: flex;
+    height: 200px;
+    border-radius: 10px;
+    align-self: flex-start;
+    /* border-top: 1px solid #cdcdcd; */
+    padding: 20px;
+}
+
+.goal-card-right {
+    margin-left: 8px;
+    display: flex;
+    align-items: flex-end;
+    margin-top: 2px;
+    /* width: 24px; */
+    padding-right: 10px;
+}
+
+.goal-card-right img {
+    width: 24px;
+    height: 24px;
+    margin-left: 3px;
+    margin-right: 5px;
+}
+
+
+.goal-center-card
+{
+    margin-top: 7px;
+    margin-left: 12px ;
+}
+.goal-name {
+    min-width: 100px;
+    width: 90%;
+    align-self: center;
+    text-align: left;
+    font-weight: 600;
+    
+}
+
+
+.input-desc{
+    width: 380px;
+    
+    border: none;
+    outline: none;
+    min-width: 100px;
+    width: 90%;
+    align-self: center;
+    font-weight: 300;
+}
+
+.goal-desc {
+
+    /* white-space: nowrap; Запрещаем перенос строк */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 100px;
+
+    align-self: center;
+    text-align: center;
+    font-weight: 300; 
+    text-align: left;   
+
+}
+
+
+.edit-goal
+{
+    margin-top: 7px;
+    align-self:flex-end;
+    display : flex;
+}
+
+.edit-goal-tag
+{
+    font-weight: 100; 
+    align-self:flex-end
+}
+
+
+.edit-goal-tag img
+{
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+}
