@@ -109,18 +109,7 @@ function remove(arr, item) {
 }
 
 export async function move(card) {
-    if (FAKE_CARDS[2].includes(card)) {
-        remove(FAKE_CARDS[2], card);
-        FAKE_CARDS[1].push(card);
-        callbackFunc();
-        return;
-    }
-    if (FAKE_CARDS[1].includes(card)) {
-        remove(FAKE_CARDS[1], card);
-        FAKE_CARDS[0].push(card);
-        callbackFunc();
-        return;
-    }
+    if (card)
 }
 
 export async function getCards() {

@@ -212,7 +212,8 @@ export async function getAllTasks() {
             hasChild: tasksList
                 .map( cur => cur["reference"] === task["id"] )
                 .reduce((x, y) => x || y, false),
-            bucket: task["horizon"]
+            bucket: task["horizon"],
+            state: task["state"]
         }
     }
    
