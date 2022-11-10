@@ -3,19 +3,31 @@ import React, { useState } from "react";
 import { DragMove } from "./DragMove";
 
 
-export function MovableTask(title) {
+export function MovableTask(label, fieldWidth, fieldHeight) {
+
     const [translate, setTranslate] = useState({
         x: 0,
         y: 0
       });
     
       const handleDragMove = (e) => {
+        
+        const oldX = translate.x;
+        var newX = translate.x + e.movementX;
+        newX = newX > 30 ? newX : oldX;
+        newX = newX < fieldWidth-30 ? newX : oldX;
+
+        const oldY = translate.y;
+        var newY = translate.y + e.movementY;
+        newY = newY < 30 ? newY : oldY;
+        newY = newY > -(fieldHeight-30) ? newY : oldY;
+        
         setTranslate({
-          x: translate.x + e.movementX,
-          y: translate.y + e.movementY
+          x: newX > 0 ? newX : oldX,
+          y: newY < 0 ? newY : oldY
         });
       };
-    
+      
       return (
         <div>
             <DragMove onDragMove={handleDragMove}>
@@ -24,7 +36,8 @@ export function MovableTask(title) {
                   transform: `translateX(${translate.x}px) translateY(${translate.y}px)`
                 }}
               >
-                {title}
+                <div className="taskIcon">🚀</div>
+                <div className="taskLabel">{label}</div>
               </div>
             </DragMove>
         </div>

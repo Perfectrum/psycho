@@ -22,8 +22,10 @@ export function Matrix() {
     return (
         <div className="matrix">
             <div className="emoji" id="fire">🔥</div>
-            <div className="importanceHeader">Срочно {'<-------------------------------------------'} </div>
+            <div className="importanceHeader">Срочно</div>
+            <div className="arrow" id="horizontalArrow">{"< "}------------------------------------------- </div>
             <div className="urgencyHeader">Важно</div>
+            <div className="arrow" id="verticalArrow">{"< "}---------------------------{" >"}</div>
             <div className="emoji" id="sparkles">✨</div>
             <div className="matrixBackground">
                 <div className="separator horizontalSeparator"></div>
@@ -32,7 +34,7 @@ export function Matrix() {
                 { matrixDecorItem("EARLIER THE BETTER!", "earlierBetter") }
                 { matrixDecorItem("TO DO OR NOT TO DO...", "doOrNo") }
             </div>
-            { MovableTask("Тас очка") }
+            { MovableTask("Proof of concept", 500, 300) }
         </div>
     );
 }

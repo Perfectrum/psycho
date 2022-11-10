@@ -1,7 +1,22 @@
 .movableTask {
     cursor: pointer;
     user-select: none;
-    width: 150px;
-    height: 30px;
-    background-color: #f1f1f1;
+    margin: 0.5em;
+}
+
+.taskIcon {
+    width: 80px;
+    height: 80px;
+    font-size: 32px;
+}
+
+.taskLabel {
+    position: absolute;
+    top: 4px;
+    left: 32px;
+    font-size: 24px;
+    background-color: #fff;
+    color: gray;
+    border-radius: 5px;
+    padding: 6px;
 }
