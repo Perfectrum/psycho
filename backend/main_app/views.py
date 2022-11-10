@@ -5,6 +5,7 @@ from .serializers import (
     GoalSerializer,
     InboxPatchSerializer,
     TaskUpdateSerializer,
+    TaskCreateSerializer,
 )
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -52,15 +53,15 @@ class InboxListAPIView(APIView):
 
     def get(self, request):
         inboxes = Inbox.objects.filter(user=request.user)
-        # inboxes = Inbox.objects.all()
         serializer = InboxSerializer(inboxes, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class TaskCreateAPIView(APIView):
+    permission_classes = (AllowAny,)
 
     def post(self, request):
-        serializer = TaskSerializer(data=request.data)
+        serializer = TaskCreateSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -111,7 +112,6 @@ class GoalUpdateInformationAPIView(APIView):
 
 
 class TaskUpdateAPIView(APIView):
-    permission_classes = (AllowAny,)
 
     def get_object(self, pk):
         return get_object_or_404(Task, id=pk)
