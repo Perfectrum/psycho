@@ -21,7 +21,7 @@ class InboxDeleteAPIView(APIView):
     def get_object(self, pk):
         return get_object_or_404(Inbox, id=pk)
 
-    def delete(self, request, pk):
+    def post(self, request, pk):
         inbox = self.get_object(pk)
         inbox.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -49,7 +49,7 @@ class InboxListAPIView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class CreateTaskAPIView(APIView):
+class TaskCreateAPIView(APIView):
 
     def post(self, request):
         serializer = TaskSerializer(data=request.data)
@@ -74,7 +74,7 @@ class GoalDeleteApiView(APIView):
     def get_object(self, pk):
         return get_object_or_404(Goal, id=pk)
 
-    def delete(self, request, pk):
+    def post(self, request, pk):
         goal = self.get_object(pk)
         goal.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -86,9 +86,9 @@ class GoalUpdateInformationAPIView(APIView):
         return get_object_or_404(Goal, id=pk)
 
     def patch(self, request, pk):
+        goal = self.get_object(pk)
         serializer = GoalSerializer(data=request.data)
         if serializer.is_valid():
-            goal = self.get_object(pk)
             goal.update(data=serializer.data)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)

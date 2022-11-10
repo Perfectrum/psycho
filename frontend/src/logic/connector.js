@@ -94,7 +94,7 @@ export async function createNewGoal(title, description) {
 
 
 export async function deleteGoal(goal_id) {
-    return await execGet('/api/goals/delete/' + goal_id + '/');
+    return await execPost('/api/goals/delete/' + goal_id + '/');
 }
 
 /*Хз, проверить, как передавать поля*/
@@ -134,7 +134,7 @@ export async function createInboxItem (  title, description)
 
 export async function deleteInboxItem (inbox_id)
 {
-    return await execGet('/api/inbox/delete/' + inbox_id + '/');
+    return await execPost('/api/inbox/delete/' + inbox_id + '/');
 }
 
 /*createTask*/
@@ -157,3 +157,18 @@ export async function updateInboxItemDescription ( user_id, inbox_item_id, new_d
         new_description
     });
 }
+
+export async function createTask (title, reference_id, goal_id, horizon_id, description, deadline, importance, urgency)
+{
+    return await execPost('/api/task/create/', {
+        title,
+        reference_id,
+        goal_id,
+        horizon_id,
+        description,
+        deadline,
+        importance,
+        urgency
+    });
+}
+
