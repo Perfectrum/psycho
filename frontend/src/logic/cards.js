@@ -93,6 +93,7 @@ const FAKE_CARDS = [
 
 let lastId = 6;
 let filter = null;
+let goalFilter = null;
 
 let callbackFunc = () => {}
 export function callback(f) {
@@ -121,11 +122,12 @@ export function move(card) {
 }
 
 export function getCards() {
-    if (filter === null) {
-        return FAKE_CARDS;
-    }
-
-   return FAKE_CARDS.map(e => e.filter(x => x.bucket === filter));
+   return FAKE_CARDS.map(
+        e => e.filter(x => 
+            (filter === null || x.bucket === filter) 
+            && (goalFilter === null || x.tags.includes(goalFilter)
+        ))
+    );
 }
 
 export function cmpBuckets(a, b) {
@@ -134,6 +136,11 @@ export function cmpBuckets(a, b) {
 
 export function setFilter(f) {
     filter = f;
+    callbackFunc();
+}
+
+export function setGoalFilter(goal) {
+    goalFilter = goal;
     callbackFunc();
 }
 

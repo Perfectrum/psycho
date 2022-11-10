@@ -147,6 +147,15 @@
     border-radius: 10px;
 }
 
+.task-table-card-info-tag-goal {
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.task-table-card-info-tag-goal:hover {
+    color: #7cb100;
+}
+
 .task-table-card-info-tag img {
     width: 18px;
     height: 18px;

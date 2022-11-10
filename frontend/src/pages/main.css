@@ -1,6 +1,6 @@
 .flex-container {
   padding: 20px;
-  height: calc(100vh - 40px);
+  min-height: calc(100vh - 40px);
   width: calc(100vw - 40px);
   display: flex;
 
@@ -31,10 +31,6 @@
 
   transition: ease-out 0.2s;
   overflow: visible;
-}
-
-.main-page-card-list {
-  width: 100%;
 }
 
 .add-button:hover {
@@ -98,6 +94,12 @@
   
 }
 
+@media (max-width: 1200px) {
+  .left-menu {
+    display: none;
+  }
+}
+
 .center {
   flex: 1;
 }
@@ -154,10 +156,18 @@
 }
 
 .main-page-card-list {
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap:nowrap;
 
   justify-content: center;
+}
+
+@media (max-width: 1200px)  {
+    .main-page-card-list {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
 }
 
 .right-bar {

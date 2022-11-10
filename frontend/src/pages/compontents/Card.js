@@ -77,7 +77,7 @@ export function Card(props) {
                     {
                         tags.length ? 
                         tags.map((e, i) => (
-                            <div key={i} className='task-table-card-info-tag'>
+                            <div key={i} onClick={() => cardsManager.setGoalFilter(e)} className='task-table-card-info-tag task-table-card-info-tag-goal'>
                                 <img src="./star.png"></img> {e}
                             </div>
                         )) : (

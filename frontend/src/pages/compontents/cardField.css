@@ -20,6 +20,7 @@
 .card-field-cont {
     flex: 1;
     max-width: 380px;
+    width: 100%;
 }
 
 .card-field .task {
