@@ -57,7 +57,10 @@ class GoalSerializer(serializers.ModelSerializer):
 
 
 class TaskCreateSerializer(serializers.ModelSerializer):
-    goals = serializers.ListField(child=serializers.IntegerField())
+    goals = serializers.ListField(
+        child=serializers.PrimaryKeyRelatedField(queryset=Goal.objects.all()),
+        allow_empty=False,
+    )
 
     class Meta:
         model = Task

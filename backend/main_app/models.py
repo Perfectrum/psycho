@@ -80,12 +80,7 @@ class Task(models.Model):
         null=True,
         blank=True
     )
-    horizon = models.ForeignKey(
-        Horizon,
-        verbose_name="Горизонт",
-        related_name="tasks",
-        on_delete=models.CASCADE
-    )
+    horizon = models.IntegerField("Горизонт")
     state = models.CharField(
         max_length=20,
         choices=c.STATE,
