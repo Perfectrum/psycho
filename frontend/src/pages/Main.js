@@ -6,6 +6,8 @@ import "./main.css"
 import * as cardsManager from '../logic/cards';
 import { useEffect, useState } from "react";
 
+import * as connector from '../logic/connector';
+
 
 function packTopButton(name, value, selected) {
     return {
@@ -27,14 +29,21 @@ function listMenuItem(imagepath, name, href) {
     );
 }
 
-export function Matrixpanel(){
+export function MatrixPanel(){
     return ( <Matrix/> );
 }
 
 export function BoardPanel() {
 
-    const [ counter, updateCounter ] = useState(0);
-    const [ cards, loadCards ] = useState([[], [], []]);
+    const [ cards, loadCards ] = useState(cardsManager.getCards());
+    
+    cardsManager.onChange(() => {
+        loadCards(cardsManager.getCards());
+    });
+
+    connector.onMsg(() => {
+        loadCards(cardsManager.getCards());
+    });
 
     const [ topButtons, updateTopButtons ] = useState([
         packTopButton("Все", null, true),
@@ -44,22 +53,6 @@ export function BoardPanel() {
         packTopButton("Месяц", cardsManager.BUCKETS.month, false),
         packTopButton("Год", cardsManager.BUCKETS.year, false)
     ]);
-
-    useEffect(() => {
-        console.log('EFFECT!');
-        forceUpdate();
-    }, []);
-
-    function forceUpdate() {
-        cardsManager.getCards().then((res) => {
-            if (res) {
-                loadCards(res);
-                updateCounter(counter + 1);
-            }
-        });
-    }
-
-    cardsManager.callback(forceUpdate);
 
     function horizonMenuItem(button, idx) {
         const { name, value, selected } = button;
@@ -93,11 +86,27 @@ export function GoalPanel() {
 
 export  function Main() {
 
+    const [ counter, setCounter ] = useState(0);
+
+    useEffect(() => {
+        connector.initilize();
+        connector.onMsg(() => {
+            setCounter(counter + 1);
+        })
+    });
+
     const navigate = useNavigate();
 
     return ( 
         <div className="flex-container">
-            <div onClick={() => navigate('/create')} className="add-button">
+            <div onClick={() => {
+                    if (window.location.href.includes('goals')) {
+                        navigate('/create/goal');
+                    } else {
+                        navigate('/create');
+                    }
+                }
+                } className="add-button">
                 +
             </div>            
             <div className="center">
@@ -108,8 +117,9 @@ export  function Main() {
                         { listMenuItem("/list.png", '', 'board') }
                  </div>
                 <div className="main-page-content">
-                    <Outlet />
+                    <Outlet counter={counter} />
                 </div>
+                <div style={{display : 'none'}}>{counter}</div>
             </div>
         </div>
     );

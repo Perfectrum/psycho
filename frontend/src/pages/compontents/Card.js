@@ -41,7 +41,7 @@ export function Card(props) {
                     mode !== 'done' && mode !== 'parent' && bucket !== cardsManager.BUCKETS.quant ? 
                     ( <div
                         onClick={() => {
-                            navigate('/create', {
+                            navigate('/create/task', {
                                 state : { parentContent : content }
                             });
                         }}

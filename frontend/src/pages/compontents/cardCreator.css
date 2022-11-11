@@ -201,6 +201,12 @@
     font-size: 14px;
     line-height: 20px;
     cursor: pointer;
+    
+    transition: 0.2s;
+}
+
+.add-card-button-black:hover {
+    background: #4b4b4b;
 }
 
 .target-target-selected {

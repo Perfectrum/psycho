@@ -11,6 +11,9 @@
     /* border-top: 1px solid #cdcdcd; */
     padding: 20px;
     margin: 10px;
+
+    overflow: hidden;
+    height: 60px;
 }
 
 .goal-card-right {

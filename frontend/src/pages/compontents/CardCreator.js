@@ -1,4 +1,4 @@
-import { createRef, useState } from 'react';
+import { createRef, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './cardCreator.css';
 import * as cardManager from '../../logic/cards';
@@ -39,11 +39,31 @@ export function CardCreator() {
         }
     }
 
+    let editTask = null;
+    if (locationState) {
+        const { editTask : task } = locationState;
+        if (task) {
+            editTask = task;
+        }
+    }
+
+    const [ initialized, makeInitialized ] = useState(false);
+
     const nameInput = createRef();
     const descInput = createRef();
 
+    useEffect(() => {
+        if (editTask && !initialized) {
+            nameInput.current.value = editTask.name;
+            descInput.current.value = editTask.desc;
+            makeInitialized(true);
+        }
+    }, []);
+
     const [ buckets, updateBuckets ] = useState(copy(UI_CARD_CREATE_BUCKETS));
-    const [ targets, updateTargets ] = useState(copy(FAKE_TARGETS));
+    const [ targets, updateTargets ] = useState(copy(cardManager.getGoals().map(
+        e => { return { name : e.name, id : e.id, selected : false } }
+    )));
     const [ stage, updateStage ] = useState(0);
     const [ choosenBucket, selectBucket ] = useState(null);
 
@@ -140,13 +160,25 @@ export function CardCreator() {
                             const name = nameInput.current.value;
                             const desc = descInput.current.value;
 
-                            cardManager.addCard(
-                                name, 
-                                desc, 
-                                choosenBucket, 
-                                parentCardContent ? parentCardContent.id : null,
-                                targets.filter(e => e.selected).map(e => e.name)
-                            );
+                            if (initialized) {
+                                cardManager.updateCard(
+                                {
+                                    id : editTask.id,
+                                    name, 
+                                    desc, 
+                                    bucket: choosenBucket, 
+                                    parent :  parentCardContent ? parentCardContent.id : null,
+                                    tags : targets.filter(e => e.selected).map(e => e.id)
+                                });
+                            } else {
+                                cardManager.addCard(
+                                    name, 
+                                    desc, 
+                                    choosenBucket, 
+                                    parentCardContent ? parentCardContent.id : null,
+                                    targets.filter(e => e.selected).map(e => e.id)
+                                );
+                            }
 
                             navigate('/main');
 
@@ -155,7 +187,7 @@ export function CardCreator() {
                 ) : ""
             }
             {
-                stage == 1 ? (
+                stage == 1 && !initialized ? (
                     <div className='show-amination card-creator-panel'>
                         <button onClick={() => {
                             const name = nameInput.current.value;

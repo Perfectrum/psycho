@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { CardCreator } from "./compontents/CardCreator";
 
 
@@ -12,7 +12,7 @@ export function Create() {
                 className='card-creator-close'
                 onClick={() => navigate('/main')}
             ><img src="/close.png" /></div>
-            <CardCreator />
+            <Outlet />
         </div>
     )
 }
