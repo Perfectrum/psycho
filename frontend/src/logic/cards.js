@@ -1,4 +1,6 @@
 
+import * as connector from './connector';
+
 const bucket_eq = [
     'quant', 'day', 'week', 'month', 'year'
 ];
@@ -91,43 +93,138 @@ const FAKE_CARDS = [
     ]
 ];
 
-let lastId = 6;
 let filter = null;
 let goalFilter = null;
 
-let callbackFunc = () => {}
-export function callback(f) {
-    callbackFunc = f;
+const onchange = [];
+export function onChange(f) {
+    onchange.push(f);
 }
 
-function remove(arr, item) {
-    const idx = arr.indexOf(item);
-    if (idx < 0) return;
-    arr.splice(idx, 1);
+function fireOnChange() {
+    for (const f of onchange) {
+        f();
+    }
 }
 
-export function move(card) {
-    if (FAKE_CARDS[2].includes(card)) {
-        remove(FAKE_CARDS[2], card);
-        FAKE_CARDS[1].push(card);
-        callbackFunc();
-        return;
+export async function move(card) {
+    if (card.state === 'todo') {
+        await connector.patchTask(
+                card.id, 
+                undefined, 
+                undefined,
+                'progress',
+                undefined,
+                undefined
+            );
+    } else if (card.state === 'progress') {
+        await connector.patchTask(
+            card.id, 
+            undefined, 
+            undefined,
+            'done',
+            undefined,
+            undefined
+        );
+    } else if (card.state === 'done') {
+        await connector.patchTask(
+            card.id, 
+            undefined, 
+            undefined,
+            'removed',
+            undefined,
+            undefined
+        );
     }
-    if (FAKE_CARDS[1].includes(card)) {
-        remove(FAKE_CARDS[1], card);
-        FAKE_CARDS[0].push(card);
-        callbackFunc();
-        return;
+}
+
+export async function moveBack(card) {
+    if (card.state === 'done') {
+        await connector.patchTask(
+                card.id, 
+                undefined, 
+                undefined,
+                'progress',
+                undefined,
+                undefined
+            );
+    } else if (card.state === 'progress') {
+        await connector.patchTask(
+            card.id, 
+            undefined, 
+            undefined,
+            'todo',
+            undefined,
+            undefined
+        );
     }
+}
+
+export async function updateCard(card) {
+    return await connector.patchTask(
+        card.id, 
+        card.name, 
+        card.desc,
+        'todo',
+        0.5,
+        0.5,
+        card.tags,
+        card.parent,
+        bucket_eq.indexOf(card.bucket)
+    );
+}
+
+export async function updateCoords(card) {
+    return await connector.patchTask(
+        card.id, 
+        undefined, 
+        undefined,
+        undefined,
+        card.importance,
+        card.urgency,
+        undefined,
+        undefined,
+        undefined
+    );
 }
 
 export function getCards() {
-   return FAKE_CARDS.map(
-        e => e.filter(x => 
+    const res = connector.getCards().map(
+        e => e.map(x => { return { ...x, bucket : bucket_eq[x.bucket] }; }).filter(x => 
             (filter === null || x.bucket === filter) 
             && (goalFilter === null || x.tags.includes(goalFilter)
         ))
     );
+
+    for (const q of res) {
+        q.sort((a, b) => {
+            if (bucket_eq.indexOf(a.bucket) <  bucket_eq.indexOf(b.bucket)) {
+                return -1;
+            }
+            if (bucket_eq.indexOf(a.bucket) >  bucket_eq.indexOf(b.bucket)) {
+                return 1;
+            }
+
+            console.log('CMP!', a.name, b.name, a.importance, b.importance);
+            if (a.importance > 0.5 && b.importance <= 0.5) {
+                return -1;
+            }
+            if (a.importance <= 0.5 && b.importance > 0.5) {
+                return 1;
+            }
+            return b.urgency - a.urgency;
+        });
+    }
+
+    return res;
+}
+
+export function getInbox() {
+    return connector.getInbox();
+}
+
+export function getGoals() {
+    return connector.getGoals();
 }
 
 export function cmpBuckets(a, b) {
@@ -136,43 +233,22 @@ export function cmpBuckets(a, b) {
 
 export function setFilter(f) {
     filter = f;
-    callbackFunc();
+    fireOnChange();
 }
 
 export function setGoalFilter(goal) {
     goalFilter = goal;
-    callbackFunc();
+    fireOnChange();
 }
 
-export function addCard(name, desc, bucket, parent, tags) {
+export async function addInbox(name, desc, parent) {
+    await connector.createTask(name, desc, 0.5, 0.5, 0, 'inbox', parent, []);
+}
 
-    let found = false;
-    let fullName = [];
-    if (parent !== null) {
-        for (const b of FAKE_CARDS) {
-            if (found) break;
-            for (const i of b) {
-                if (i.id === parent) {
-                    i.hasChild = true; 
-                    fullName.push(i.name, ...i.fullName);
-                    found = true;
-                    break;
-                }
-            }
-        }
-    }
+export async function addCard(name, desc, bucket, parent, tags) {
+    await connector.createTask(name, desc, 0.5, 0.5, bucket_eq.indexOf(bucket), 'todo', parent, tags);
+}
 
-    console.log(tags);
-    FAKE_CARDS[2].push({
-        id : ++lastId,
-        name,
-        desc,
-        bucket,
-        hasChild: false,
-        parent: parent,
-        fullName,
-        tags
-    });
-
-    callbackFunc();
+export function addGoal(title, description) {
+    return connector.createGoal(title, description);
 }

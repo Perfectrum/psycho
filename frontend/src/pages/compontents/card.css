@@ -50,12 +50,38 @@
     height: 24px;
 }
 
+.task-table-go-back-action {
+    cursor: pointer;
+
+    width: 24px;
+    height: 24px;
+
+    opacity: 0.0;
+    transition: 0.2s;
+}
+
+.card-with-border:hover .task-table-go-back-action {
+    opacity: 1.0;
+}
+
+.task-table-go-back-action img {
+    width: 24px;
+    height: 24px;
+
+    border-radius: 50%;
+}
+
+
+.task-table-go-back-action:hover img {
+    animation: jump-x 0.3s cubic-bezier(.38,.2,.3,1) forwards;
+}
+
 .task-table-card-right img {
     width: 24px;
     height: 24px;
 
     border-radius: 50%;
-    
+    transition: 0.2s;    
 }
 
 .jump-anim img:hover {
@@ -111,6 +137,21 @@
 
 .hide-down-anim {
     animation: hide-card 0.2s cubic-bezier(.38,.2,.3,1) forwards;
+}
+
+.hide-not-down-anim {
+    animation: hide-back-card 0.2s cubic-bezier(.38,.2,.3,1) forwards;
+}
+
+@keyframes hide-back-card {
+    from {
+        transform: translateX(0);
+        opacity: 1.0;
+    }
+    to {
+        transform: translateX(40px);
+        opacity: 0.0;
+    }
 }
 
 @keyframes hide-card {

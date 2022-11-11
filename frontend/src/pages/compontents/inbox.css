@@ -1,0 +1,52 @@
+.inbox-card {
+    
+    flex-direction: column;
+
+    width: 320px;
+    background-color: #f1f1f1;
+
+    display: flex;
+    border-radius: 10px;
+    align-self: flex-start;
+    /* border-top: 1px solid #cdcdcd; */
+    padding: 20px;
+    margin: 10px;
+
+    overflow: hidden;
+    height: 60px;
+
+    cursor: pointer;
+    user-select: none;
+
+    transition: 0.2s;
+}
+
+.inbox-card:hover {
+    background-color: #e1e1e1;
+}
+
+.inbox-card-right {
+    font-weight: 600;
+    /* width: 24px; */
+    padding-right: 10px;
+}
+
+.inbox-card-right img {
+    width: 24px;
+    height: 24px;
+    margin-left: 3px;
+    margin-right: 5px;
+}
+
+.inbox-desc {
+    font-weight: 300;
+}
+
+
+.inbox-center-card
+{
+    margin-top: 7px;
+}
+.inbox-name {
+    font-weight: 600;
+}

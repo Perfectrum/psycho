@@ -53,7 +53,7 @@ class GoalNestedSerializer(serializers.ModelSerializer):
 class GoalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Goal
-        fields = ("title", "description")
+        fields = ("id", "title", "description")
 
 
 class TaskCreateSerializer(serializers.ModelSerializer):
