@@ -120,12 +120,7 @@ export async function login({ username, password }) {
     if (!res) return res;
     const { access, refresh } = res;
 
-    token = access;
-    tokenRefresh = refresh;
-
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-    tryInitialize();
+    document.cookie = `token=${access}`;
 
     return true;
 }
@@ -327,7 +322,16 @@ export function initilize() {
         `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.hostname}:${window.location.port}/listen`
     );
 
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return 'sorry :(';
+    }
+
     ws.onopen = () => {
+        ws.send(getCookie('token'));
         console.log('OPENED!');
     }
 

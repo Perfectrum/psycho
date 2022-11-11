@@ -230,6 +230,10 @@
   padding-left: 10px;
 }
 
+.right-align {
+  margin-left: auto;
+}
+
 .left-menu-list-item img {
   width: 18px;
   height: 18px;

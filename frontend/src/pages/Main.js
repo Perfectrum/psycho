@@ -21,9 +21,9 @@ function horizonMenuItem(name, selected) {
     return ( <div data-tooltip={name == 'ЭКД' ? "Квант" : ""} className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
 }
 
-function listMenuItem(imagepath, name, href) {
+function listMenuItem(imagepath, name, href, action) {
     return ( 
-        <Link className="left-menu-list-item" to={href}>
+        <Link onClick={() => { if (action) action(); }} className={`${action ? 'right-align' : ''} left-menu-list-item`} to={href}>
             <img src={imagepath}/>
         </Link>
     );
@@ -115,6 +115,10 @@ export  function Main() {
                         { listMenuItem("/matrix.png", '', 'matrix') }
                         { listMenuItem("/goals.png",'', 'goals') }
                         { listMenuItem("/list.png", '', 'board') }
+                        { listMenuItem("/logout.png", '', '/', () => {
+                            document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                            window.location.href = '/';
+                        }) }
                  </div>
                 <div className="main-page-content">
                     <Outlet counter={counter} />
