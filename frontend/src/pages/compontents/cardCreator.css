@@ -183,6 +183,32 @@
     cursor: pointer;
 }
 
+.add-card-button-black {
+    border: none;
+    outline: none;
+
+    width: 100px;
+    padding: 10px 0 12px 0;
+
+    border-radius: 20px;
+
+    font-weight: 600;
+    color: #ffffff;
+    background: #303030;
+
+    transition: 0.2s;
+
+    font-size: 14px;
+    line-height: 20px;
+    cursor: pointer;
+    
+    transition: 0.2s;
+}
+
+.add-card-button-black:hover {
+    background: #4b4b4b;
+}
+
 .target-target-selected {
     background: linear-gradient(38deg, rgba(62,206,210,1) 29%, rgba(154,44,223,1) 82%);
     color: #ffffff;

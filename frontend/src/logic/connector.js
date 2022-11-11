@@ -26,6 +26,28 @@ async function execPost(url, body) {
     }
 }
 
+async function execPatch(url, body) {
+
+    try {
+
+        fromLocalStorage();
+        const tokenParams = token === null ? {} : {
+            headers: {
+                'Authorization' : `Bearer ${token}`
+            }
+        };
+
+        // console.log(tokenParams);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+        const res = await axios.patch(url, body, { 'Content-Type' : 'application/json', ...tokenParams });
+        return res.data;
+    } catch (ex) {
+        console.error(ex.response ? ex.response.data : ex);
+        return null;
+    }
+}
+
 async function execDelete(url, body) {
     try {
 
@@ -98,12 +120,7 @@ export async function login({ username, password }) {
     if (!res) return res;
     const { access, refresh } = res;
 
-    token = access;
-    tokenRefresh = refresh;
-
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-    tryInitialize();
+    document.cookie = `token=${access}`;
 
     return true;
 }
@@ -181,11 +198,83 @@ export async function updateInboxItemDescription ( user_id, inbox_item_id, new_d
     });
 }
 
-
-
 export async function getAllTasks() {
     const response = await execGet('/api/task/list/');
+    return mapTasks(response);
+}
 
+
+export async function createTask (title, description, importance, urgency, horizon, state, reference=null, goals=null) {
+    return await execPost('/api/task/create/', {
+        title,
+        importance,
+        urgency,
+        horizon,
+        state,
+        reference,
+        goals,
+        description
+    });
+}
+
+
+export async function patchTask (task_id, title, description, state, importance, urgency, goals, reference, horizon) {
+    return await execPatch(`/api/task/patch/${task_id}/`, {
+        state,
+        importance,
+        urgency,
+        title,
+        description,
+        goals,
+        reference,
+        horizon
+    });
+}
+
+export async function createGoal(title, description) {
+    return await execPost('/api/goals/create_goal', {
+        title,
+        description
+    });
+}
+
+export async function getAllGoals() {
+    return await execGet('/api/goals/list', {});
+}
+
+const state = { 
+    cards : [[], [], []],
+    goals : [],
+    inbox : []
+};
+
+function convertTask (task, _, tasksList) {
+    return {
+        id: task["id"],
+        name: task["title"],
+        desc: task["description"],
+        parent: task["reference"],
+        fullName: task.fullName,
+        tags: task["goals"].map(e => {
+            const r = state.goals.find(x => x.id === e);
+            if (r) {
+                return r.name;
+            } else {
+                return null;
+            }
+        }).filter(x => x !== null),
+        hasChild: tasksList
+            .map( cur => cur["reference"] === task["id"] )
+            .reduce((x, y) => x || y, false),
+        bucket: task["horizon"],
+        state: task["state"],
+        urgency : task['urgency'],
+        importance: task['importance']
+
+    }
+}
+
+function mapTasks(response) {
     for (const task of response) {
         let cur = task.reference;
         task.fullName = [];
@@ -195,53 +284,76 @@ export async function getAllTasks() {
             cur = cur2.reference;
         }
     }
-
-    function convertTask (task, _, tasksList) {
-        return {
-            "id": task["id"],
-            "name": task["title"],
-            "desc": task["description"],
-            "parent": task["reference"],
-            "fullName": task.fullName,
-            "tags": task["goals"],
-            "hasChild": tasksList
-                .map( cur => cur["reference"] === task["id"] )
-                .reduce((x, y) => x || y, false),
-            "bucket": task["horizon"]
-        }
-    }
    
     return [
-        response.filter( task => task["state"] === "todo" ).map( convertTask ),
+        response.filter( task => task["state"] === "done" ).map( convertTask ),
         response.filter( task => task["state"] === "progress" ).map( convertTask ),
-        response.filter( task => task["state"] === "done" ).map( convertTask )
+        response.filter( task => task["state"] === "todo" ).map( convertTask )
     ];
 }
 
-
-export async function createTask (title, importance, urgency, horizon, state, reference=null, goals=null) {
-    const response = execPost('/api/task/create/', {
-        title,
-        importance,
-        urgency,
-        horizon,
-        state,
-        reference,
-        goals
-    });
-
-    return getAllTasks();
+function mapGoals(response) {
+    return response.map(e => { return { id: e.id, name : e.title, desc : e.description }});
 }
 
+export function getCards() {
+    return state.cards;
+}
 
-export async function patchTask (task_id, title, description, state, importance, urgency) {
-    const response = execPost('/api/task/patch/' + task_id + '/', {
-        state,
-        importance,
-        urgency,
-        title,
-        description
-    });
-    
-    return getAllTasks();
+export function getGoals() {
+    return state.goals;
+}
+
+export function getInbox() {
+    return state.inbox;
+}
+
+const onmsg = [];
+export function onMsg(f) {
+    onmsg.push(f);
+}
+
+let initilized = false;
+export function initilize() {
+
+    if (initilized) return;
+    initilized = true;
+    const ws = new WebSocket(
+        `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.hostname}:${window.location.port}/listen`
+    );
+
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return 'sorry :(';
+    }
+
+    ws.onopen = () => {
+        ws.send(getCookie('token'));
+        console.log('OPENED!');
+    }
+
+    ws.onmessage = (msg) => {
+        const data = JSON.parse(msg.data);
+        if (data.goal) {
+            state.goals = mapGoals(data.goal);
+        }
+        if (data.task) {
+            state.cards = mapTasks(data.task);
+            state.inbox = data.task.filter(x => x.state === 'inbox').map(convertTask);
+        }
+
+        console.log(state);
+        for (const f of onmsg) {
+            f(state);
+        }
+    }
+
+    ws.onerror = console.error;
+
+    ws.onclose = () => {
+        console.log('CLOSED!');
+    }
 }

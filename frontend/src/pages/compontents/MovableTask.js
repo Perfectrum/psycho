@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import { DragMove } from "./DragMove";
 
 
-export function MovableTask(
-  label, fieldWidth, fieldHeight, importance=0.5, urgency=0.5) {
+export function MovableTask(props) {
+
+  const { card, label, fieldWidth, fieldHeight, importance, urgency } = props;
 
     const [translate, setTranslate] = useState({
         x: fieldWidth * (1 - urgency),
@@ -18,10 +19,14 @@ export function MovableTask(
         newX = newX > 30 ? newX : oldX;
         newX = newX < fieldWidth-30 ? newX : oldX;
 
+        card.urgency =  1 - (newX / fieldWidth);
+
         const oldY = translate.y;
         var newY = translate.y + e.movementY;
         newY = newY < 30 ? newY : oldY;
         newY = newY > -(fieldHeight-30) ? newY : oldY;
+
+        card.importance =  -(newY / fieldHeight) ;
         
         setTranslate({
           x: newX > 0 ? newX : oldX,

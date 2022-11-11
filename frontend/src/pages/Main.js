@@ -4,7 +4,9 @@ import { Goals } from './Goals';
 import { Matrix } from "./compontents/Matrix";
 import "./main.css"
 import * as cardsManager from '../logic/cards';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import * as connector from '../logic/connector';
 
 
 function packTopButton(name, value, selected) {
@@ -19,21 +21,29 @@ function horizonMenuItem(name, selected) {
     return ( <div data-tooltip={name == 'ЭКД' ? "Квант" : ""} className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
 }
 
-function listMenuItem(imagepath, name, href) {
+function listMenuItem(imagepath, name, href, action) {
     return ( 
-        <Link className="left-menu-list-item" to={href}>
+        <Link onClick={() => { if (action) action(); }} className={`${action ? 'right-align' : ''} left-menu-list-item`} to={href}>
             <img src={imagepath}/>
         </Link>
     );
 }
 
-export function Matrixpanel(){
+export function MatrixPanel(){
     return ( <Matrix/> );
 }
 
 export function BoardPanel() {
 
-    const [ counter, updateCounter ] = useState(0);
+    const [ cards, loadCards ] = useState(cardsManager.getCards());
+    
+    cardsManager.onChange(() => {
+        loadCards(cardsManager.getCards());
+    });
+
+    connector.onMsg(() => {
+        loadCards(cardsManager.getCards());
+    });
 
     const [ topButtons, updateTopButtons ] = useState([
         packTopButton("Все", null, true),
@@ -44,14 +54,6 @@ export function BoardPanel() {
         packTopButton("Год", cardsManager.BUCKETS.year, false)
     ]);
 
-
-    function forceUpdate() {
-        updateCounter(counter + 1);
-    }
-
-    const cards = cardsManager.getCards();
-    cardsManager.callback(forceUpdate);
-
     function horizonMenuItem(button, idx) {
         const { name, value, selected } = button;
         return ( <div key={idx} onClick={() => {
@@ -61,7 +63,7 @@ export function BoardPanel() {
             button.selected = true;
             cardsManager.setFilter(value);
             updateTopButtons([...topButtons]);
-        }} data-tooltip={name == 'Квант' ? "Минимальный промежуток времени (обычно ~20 минут)" : ""} className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
+        }} className={`${selected ? "main-page-tab-selected" : ""} main-page-tabs-list-item`}>{name}</div>)
     }
 
     return (
@@ -84,11 +86,27 @@ export function GoalPanel() {
 
 export  function Main() {
 
+    const [ counter, setCounter ] = useState(0);
+
+    useEffect(() => {
+        connector.initilize();
+        connector.onMsg(() => {
+            setCounter(counter + 1);
+        })
+    });
+
     const navigate = useNavigate();
 
     return ( 
         <div className="flex-container">
-            <div onClick={() => navigate('/create')} className="add-button">
+            <div onClick={() => {
+                    if (window.location.href.includes('goals')) {
+                        navigate('/create/goal');
+                    } else {
+                        navigate('/create');
+                    }
+                }
+                } className="add-button">
                 +
             </div>            
             <div className="center">
@@ -97,10 +115,15 @@ export  function Main() {
                         { listMenuItem("/matrix.png", '', 'matrix') }
                         { listMenuItem("/goals.png",'', 'goals') }
                         { listMenuItem("/list.png", '', 'board') }
+                        { listMenuItem("/logout.png", '', '/', () => {
+                            document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                            window.location.href = '/';
+                        }) }
                  </div>
                 <div className="main-page-content">
-                    <Outlet />
+                    <Outlet counter={counter} />
                 </div>
+                <div style={{display : 'none'}}>{counter}</div>
             </div>
         </div>
     );

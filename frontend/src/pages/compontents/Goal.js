@@ -13,14 +13,7 @@ export function Goal(props) {
             <div className="goal-center-card">
                 <div className="goal-desc">
                     {desc} 
-                </div>
-                <div className='edit-goal'> 
-                    <div className='edit-goal-tag'>
-                        <img src="/edit.png"></img>
-                        Редактировать
-                    </div>
-                </div>
-                
+                </div>                
             </div> 
         </div>
     );
